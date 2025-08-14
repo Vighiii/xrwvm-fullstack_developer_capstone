@@ -58,17 +58,38 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
-//Write your code here
+    try {
+        const dealers = await Dealer.find(); // Assuming 'Dealer' is your Mongoose model
+        res.json(dealers);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
-//Write your code here
+    const state = req.params.state;
+    try {
+        const dealers = await Dealer.find({ state: state });
+        res.json(dealers);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
-//Write your code here
+    const id = req.params.id;
+    try {
+        const dealer = await Dealer.findById(id);
+        if (dealer) {
+            res.json(dealer);
+        } else {
+            res.status(404).send('Dealer not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 //Express route to insert review
