@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Best Cars Dealership</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .contact-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .contact-header {
+            color: darkturquoise;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .contact-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        .contact-card h3 {
+            color: darkturquoise;
+            margin-bottom: 1rem;
+        }
+        .contact-icon {
+            font-size: 2rem;
+            color: darkturquoise;
+            margin-bottom: 1rem;
+        }
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .contact-form button {
+            background-color: darkturquoise;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .contact-form button:hover {
+            background-color: #00b3b3;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+        <div class="container-fluid">
+            <h2 style="padding-right: 5%;">Best Cars Dealership</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger;" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Reach out through any of these channels.</p>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>Phone</h3>
+                <p>Main: (555) 123-4567</p>
+                <p>Sales: (555) 123-4568</p>
+                <p>Service: (555) 123-4569</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h3>Email</h3>
+                <p>General: info@bestcars.com</p>
+                <p>Sales: sales@bestcars.com</p>
+                <p>Support: support@bestcars.com</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">🏢</div>
+                <h3>Address</h3>
+                <p>123 Auto Boulevard</p>
+                <p>Motor City, MC 12345</p>
+                <p>United States</p>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" placeholder="Subject">
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
