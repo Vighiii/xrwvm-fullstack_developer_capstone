@@ -124,3 +124,25 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+.active a {
+    font-weight: bold;
+    color: blue; /* Cambia el color según tu preferencia */
+}
+nav {
+    background-color: #f8f9fa; /* Color de fondo de la barra de navegación */
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0;
+}
+
+nav ul li {
+    display: inline; /* Para que los elementos estén en línea */
+    margin-right: 20px; /* Espacio entre elementos */
+}
+
+.contact-info {
+    padding: 20px; /* Espacio alrededor de la información de contacto */
+}
