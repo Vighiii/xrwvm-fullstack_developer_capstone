@@ -1,72 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { Button, Form, Alert } from "react-bootstrap";
 
 import "./Login.css";
 import Header from '../Header/Header';
 
 const Login = ({ onClose }) => {
-
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [open,setOpen] = useState(true)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  let login_url = window.location.origin+"/djangoapp/login";
-
-  const login = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
 
-    const res = await fetch(login_url, {
+    try {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            "userName": userName,
-            "password": password
-        }),
-    });
-    
-    const json = await res.json();
-    if (json.status != null && json.status === "Authenticated") {
-        sessionStorage.setItem('username', json.userName);
-        setOpen(false);        
-    }
-    else {
-      alert("The user could not be authenticated.")
-    }
-};
+        body: JSON.stringify({ username, password }),
+      });
 
-  if (!open) {
-    window.location.href = "/";
+      if (!response.ok) {
+        throw new Error("Invalid username or password");
+      }
+
+      const data = await response.json();
+      sessionStorage.setItem("username", data.username);
+      sessionStorage.setItem("token", data.token);
+      await login(username, password);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
-  
+
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <div onClick={onClose}>
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className="modalContainer"
+          >
+            <h2>Loading...</h2>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <Header/>
-    <div onClick={onClose}>
-      <div
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        className='modalContainer'
-      >
-          <form className="login_panel" style={{}} onSubmit={login}>
-              <div>
-              <span className="input_field">Username </span>
-              <input type="text"  name="username" placeholder="Username" className="input_field" onChange={(e) => setUserName(e.target.value)}/>
-              </div>
-              <div>
-              <span className="input_field">Password </span>
-              <input name="psw" type="password"  placeholder="Password" className="input_field" onChange={(e) => setPassword(e.target.value)}/>            
-              </div>
-              <div>
-              <input className="action_button" type="submit" value="Login"/>
-              <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
-              </div>
-              <a className="loginlink" href="/register">Register Now</a>
-          </form>
+      <Header />
+      <div onClick={onClose}>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="modalContainer"
+        >
+          <Form onSubmit={handleSubmit}>
+            <h2>Login</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </Button>
+          </Form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

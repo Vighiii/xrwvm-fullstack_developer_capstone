@@ -1,123 +1,199 @@
+/*jshint esversion: 8 */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import "./Dealers.css";
-import "../assets/style.css";
+import './Dealers.css';
+import './PostReview.css';
+import '../assets/style.css';
 import Header from '../Header/Header';
-
+import { Form, Button, Alert } from 'react-bootstrap';
 
 const PostReview = () => {
-  const [dealer, setDealer] = useState({});
-  const [review, setReview] = useState("");
-  const [model, setModel] = useState();
-  const [year, setYear] = useState("");
-  const [date, setDate] = useState("");
-  const [carmodels, setCarmodels] = useState([]);
-
-  let curr_url = window.location.href;
-  let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
-  let params = useParams();
-  let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let review_url = root_url+`djangoapp/add_review`;
-  let carmodels_url = root_url+`djangoapp/get_cars`;
-
-  const postreview = async ()=>{
-    let name = sessionStorage.getItem("firstname")+" "+sessionStorage.getItem("lastname");
-    //If the first and second name are stores as null, use the username
-    if(name.includes("null")) {
-      name = sessionStorage.getItem("username");
-    }
-    if(!model || review === "" || date === "" || year === "" || model === "") {
-      alert("All details are mandatory")
-      return;
-    }
-
-    let model_split = model.split(" ");
-    let make_chosen = model_split[0];
-    let model_chosen = model_split[1];
-
-    let jsoninput = JSON.stringify({
-      "name": name,
-      "dealership": id,
-      "review": review,
-      "purchase": true,
-      "purchase_date": date,
-      "car_make": make_chosen,
-      "car_model": model_chosen,
-      "car_year": year,
-    });
-
-    console.log(jsoninput);
-    const res = await fetch(review_url, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: jsoninput,
+  const [review, setReview] = useState({
+    name: '',
+    purchase: false,
+    purchase_date: '',
+    car_make: '',
+    car_model: '',
+    car_year: '',
+    review: '',
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const { dealerId } = useParams();
 
-  const json = await res.json();
-  if (json.status === 200) {
-      window.location.href = window.location.origin+"/dealer/"+id;
-  }
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setReview((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
 
-  }
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      if(dealerobjs.length > 0)
-        setDealer(dealerobjs[0])
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      // Validate required fields
+      if (!review.name || !review.review) {
+        throw new Error('Name and review are required');
+      }
+
+      if (review.purchase) {
+        if (!review.purchase_date || !review.car_make || !review.car_model || !review.car_year) {
+          throw new Error('All car details are required when purchase is checked');
+        }
+
+        // Validate car year
+        const year = parseInt(review.car_year, 10);
+        if (Number.isNaN(year) || year < 1900 || year > new Date().getFullYear()) {
+          throw new Error('Please enter a valid car year');
+        }
+      }
+
+      // Validate review length
+      if (review.review.length < 10) {
+        throw new Error('Review must be at least 10 characters long');
+      }
+
+      const response = await fetch(`/api/dealerships/${dealerId}/reviews`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(review),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit review');
+      }
+
+      setSuccess(true);
+      setReview({
+        name: '',
+        purchase: false,
+        purchase_date: '',
+        car_make: '',
+        car_model: '',
+        car_year: '',
+        review: '',
+      });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  const get_cars = async ()=>{
-    const res = await fetch(carmodels_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    let carmodelsarr = Array.from(retobj.CarModels)
-    setCarmodels(carmodelsarr)
-  }
   useEffect(() => {
-    get_dealer();
-    get_cars();
-  },[]);
+    setLoading(false);
+  }, []);
 
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <Header/>
-      <div  style={{margin:"5%"}}>
-      <h1 style={{color:"darkblue"}}>{dealer.full_name}</h1>
-      <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
-      <div className='input_field'>
-      Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
-      </div>
-      <div className='input_field'>
-      Car Make 
-      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
-      <option value="" selected disabled hidden>Choose Car Make and Model</option>
-      {carmodels.map(carmodel => (
-          <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
-      ))}
-      </select>        
-      </div >
-
-      <div className='input_field'>
-      Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
-      </div>
-
-      <div>
-      <button className='postreview' onClick={postreview}>Post Review</button>
+      <Header />
+      <div className="container mt-5">
+        <h2>Post a Review</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {success && <Alert variant="success">Review submitted successfully!</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={review.name}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              name="purchase"
+              label="I purchased a car from this dealer"
+              checked={review.purchase}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          {review.purchase && (
+            <>
+              <Form.Group className="mb-3">
+                <Form.Label>Purchase Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="purchase_date"
+                  value={review.purchase_date}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Car Make</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="car_make"
+                  value={review.car_make}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Car Model</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="car_model"
+                  value={review.car_model}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Car Year</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="car_year"
+                  value={review.car_year}
+                  onChange={handleChange}
+                  min="1900"
+                  max={new Date().getFullYear()}
+                  required
+                />
+              </Form.Group>
+            </>
+          )}
+          <Form.Group className="mb-3">
+            <Form.Label>Review</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="review"
+              value={review.review}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? 'Submitting...' : 'Submit Review'}
+          </Button>
+        </Form>
       </div>
     </div>
-    </div>
-  )
-}
-export default PostReview
+  );
+};
+
+export default PostReview;

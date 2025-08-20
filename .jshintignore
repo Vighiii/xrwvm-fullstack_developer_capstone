@@ -1,0 +1,4 @@
+# Ignorar carpeta entera de frontend (y cualquier otro directorio que no quieras que JSHint toque)
+server/frontend/**
+server/djangoapp/**    # (opcional: si no tienes .js legacy dentro de djangoapp)
+*.jsx                  # ignora cualquier archivo con extensión .jsx 
