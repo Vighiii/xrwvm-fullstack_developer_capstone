@@ -124,3 +124,66 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+.rectangle{
+    width: 70vw;
+    height: 70vh;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;   /* stack items vertically */
+    /*justify-content: center;*/  /* center items vertically */
+    align-items: center;      /* center items horizontally */
+    text-align: center;       /* center text inside the items */
+}
+.box {
+    width: 100%;  /* Full width */
+    height: 50%;  /* Each box takes 50% of the parent's height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box:last-child {
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-between;*/ /* Space between the sub-boxes */
+    align-items: center;
+    /*width: 100%;*/
+    /*padding:10px;*/
+}
+/* Sub-boxes inside the last box */
+.sub-box{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sub-box h2{
+    text-align: center;
+}
+.sub-box ul {
+    list-style: none;
+    padding: 0;
+    text-align: left; /* Aligns the text to the left */
+}
+.sub-box li {
+    margin-bottom: 10px;
+    text-align: left; /* Ensures text within list items is aligned left */
+}
+.sub-box li strong{
+    display: inline-block;
+    width: 80px;
+    text-align: left; /* Aligns the text to the left */
+}

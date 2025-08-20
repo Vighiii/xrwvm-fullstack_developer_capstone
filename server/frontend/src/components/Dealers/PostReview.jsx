@@ -6,20 +6,25 @@ import Header from '../Header/Header';
 
 
 const PostReview = () => {
-  const [dealer, setDealer] = useState({});
-  const [review, setReview] = useState("");
-  const [model, setModel] = useState();
-  const [year, setYear] = useState("");
-  const [date, setDate] = useState("");
-  const [carmodels, setCarmodels] = useState([]);
+    // State variables to store dealer details, review input, car details and fetched list of car models
+    const [dealer, setDealer] = useState({});
+    const [review, setReview] = useState("");
+    const [model, setModel] = useState();
+    const [year, setYear] = useState("");
+    const [date, setDate] = useState("");
+    const [carmodels, setCarmodels] = useState([]);
 
-  let curr_url = window.location.href;
-  let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
-  let params = useParams();
-  let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let review_url = root_url+`djangoapp/add_review`;
-  let carmodels_url = root_url+`djangoapp/get_cars`;
+    //Get the current URL to contruct API endpoints dynamically
+    let curr_url = window.location.href;
+    //Extract the base URL before "postreview" from the current URL
+    let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
+    // Retrieve URL parameters; expects an "id" parameter (dealer id)
+    let params = useParams();
+    let id =params.id;
+    let dealer_url = root_url+`djangoapp/dealer/${id}`;
+    console.log("Dealer URL: ", dealer_url);
+    let review_url = root_url+`djangoapp/add_review`;
+    let carmodels_url = root_url+`djangoapp/get_cars`;
 
   const postreview = async ()=>{
     let name = sessionStorage.getItem("firstname")+" "+sessionStorage.getItem("lastname");
@@ -69,11 +74,15 @@ const PostReview = () => {
     const retobj = await res.json();
     
     if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      if(dealerobjs.length > 0)
-        setDealer(dealerobjs[0])
+      console.log("Dealer response: ", retobj);
+        //let dealerobjs = Array.from(retobj.dealer)
+        //if(dealerobjs.length > 0){
+        //console.log("Fetched dealer: ", dealerobjs[0]);
+        setDealer(retobj.dealer);
     }
-  }
+    else {console.log("No dealer fetched!");}
+    }
+  
 
   const get_cars = async ()=>{
     const res = await fetch(carmodels_url, {
@@ -94,7 +103,7 @@ const PostReview = () => {
     <div>
       <Header/>
       <div  style={{margin:"5%"}}>
-      <h1 style={{color:"darkblue"}}>{dealer.full_name}</h1>
+      <h1 style={{color:"darkblue"}}>{dealer.full_name || dealer.name}</h1>
       <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
       <div className='input_field'>
       Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
