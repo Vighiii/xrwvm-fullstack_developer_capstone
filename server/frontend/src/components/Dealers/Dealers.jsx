@@ -20,7 +20,7 @@ const Dealers = () => {
       method: "GET"
     });
     const retobj = await res.json();
-    if(retobj.status === 200) {
+    if(retobj.status === '200') {
       let state_dealers = Array.from(retobj.dealers)
       setDealersList(state_dealers)
     }
@@ -30,13 +30,19 @@ const Dealers = () => {
     const res = await fetch(dealer_url, {
       method: "GET"
     });
+    console.log(res)
+   
     const retobj = await res.json();
-    if(retobj.status === 200) {
+    console.log('retobj',retobj)
+    console.log('retobj.status',retobj.status)
+    if(retobj.status === '200') {
       let all_dealers = Array.from(retobj.dealers)
       let states = [];
       all_dealers.forEach((dealer)=>{
         states.push(dealer.state)
       });
+
+      console.log('all_dealers', all_dealers)
 
       setStates(Array.from(new Set(states)))
       setDealersList(all_dealers)
@@ -44,6 +50,7 @@ const Dealers = () => {
   }
   useEffect(() => {
     get_dealers();
+    console.log("dealersList",dealersList)
   },[]);  
 
 

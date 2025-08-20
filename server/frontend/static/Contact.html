@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Taskify</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <style>
+        .banner {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .banner h1 {
+            color: #0056b3;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .contact-card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .form-control:focus {
+            border-color: #17a2b8;
+            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+        
+        .contact-info h3 {
+            color: #17a2b8;
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 8px;
+            margin-top: 15px;
+        }
+        
+        footer {
+            margin-top: 30px;
+            padding: 15px 0;
+            background-color: #f1f1f1;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+        <div class="container-fluid">
+            <h2 style="padding-right: 5%;">Dealerships</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  
+
+    <div class="card contact-card" style="width: 80%;margin: auto; margin-top:5%;">
+        <div class="banner" name="contact-header">
+            <h1>Contact Us</h1>
+            <p class="lead" style="font-size: 18px; color: #555;">Have questions or feedback? Reach out to our team at Best Cars dealership. We're here to assist you with all your automotive needs.</p>
+            <img src="/static/cars.jpeg" alt="Our Car Collection" style="width: 60%; height: auto; max-height: 200px; margin: 10px auto; display: block; border-radius: 8px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+        <div class="row" style="margin: 0; padding: 15px;">
+            <!-- Contact form in left column -->
+            <div class="col-md-6">
+                <div class="contact-form" style="padding: 10px;">
+                    <h4 style="color: #17a2b8; margin-bottom: 15px; font-weight: 500;">Send Us a Message</h4>
+                    <form>
+                        <div class="mb-2">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="mb-2">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact info in right column -->
+            <div class="col-md-6">
+                <div class="contact-info" style="padding: 10px; background-color: #f9f9f9; border-radius: 8px;">
+                    <h3>Visit Us</h3>
+                    <p><i class="fa fa-map-marker"></i> 123 Car Avenue, Automotive City, AC 12345</p>
+                    
+                    <h3>Call Us</h3>
+                    <p><i class="fa fa-phone"></i> Sales: (555) 123-4567<br>
+                    <i class="fa fa-phone"></i> Service: (555) 987-6543</p>
+                    
+                    <h3>Email Us</h3>
+                    <p><i class="fa fa-envelope"></i> info@bestcars.com</p>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <h4 style="color: #17a2b8;">Business Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 8:00 PM<br>
+                        Saturday: 10:00 AM - 6:00 PM<br>
+                        Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Best Cars Dealership. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Add Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

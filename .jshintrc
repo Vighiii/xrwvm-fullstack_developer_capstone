@@ -1,0 +1,7 @@
+{
+  "esversion": 8,     // enable ES2017: const/let, =>, async/await ✔ :contentReference[oaicite:2]{index=2}
+  "node": true,       // recognise Node globals (require, module, etc.) ✔ :contentReference[oaicite:3]{index=3}
+  "asi": true,        // allow automatic semicolon insertion ✔ :contentReference[oaicite:4]{index=4}
+  "sub": true,        // no dot‑notation nag for obj['prop'] ✔ :contentReference[oaicite:5]{index=5}
+  "expr": true        // permit lone expressions (optional)
+}
