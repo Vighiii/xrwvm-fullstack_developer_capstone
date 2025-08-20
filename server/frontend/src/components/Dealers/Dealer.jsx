@@ -31,7 +31,7 @@ const Dealer = () => {
     const retobj = await res.json();
     
     if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
+        let dealerobjs = [retobj.dealer];
       setDealer(dealerobjs[0])
     }
   }
@@ -41,7 +41,6 @@ const Dealer = () => {
       method: "GET"
     });
     const retobj = await res.json();
-    
     if(retobj.status === 200) {
       if(retobj.reviews.length > 0){
         setReviews(retobj.reviews)
@@ -71,7 +70,8 @@ return(
   <div style={{margin:"20px"}}>
       <Header/>
       <div style={{marginTop:"10px"}}>
-      <h1 style={{color:"grey"}}>{dealer.full_name}{postReview}</h1>
+        {console.log(dealer)}
+      <h1 style={{color:"grey"}}>{dealer['full_name']}{postReview}</h1>
       <h4  style={{color:"grey"}}>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
       </div>
       <div class="reviews_panel">

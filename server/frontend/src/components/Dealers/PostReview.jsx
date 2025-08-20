@@ -52,11 +52,13 @@ const PostReview = () => {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${name}`,
       },
       body: jsoninput,
   });
 
   const json = await res.json();
+  console.log(json)
   if (json.status === 200) {
       window.location.href = window.location.origin+"/dealer/"+id;
   }
