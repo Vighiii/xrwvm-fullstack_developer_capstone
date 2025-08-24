@@ -18,6 +18,7 @@ const Reviews = require('./review');
 
 const Dealerships = require('./dealership');
 
+
 try {
   Reviews.deleteMany({}).then(()=>{
     Reviews.insertMany(reviews_data['reviews']);
@@ -58,17 +59,39 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
-//Write your code here
+  try {
+    const documents = await Dealerships.find();
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching dealerships' });
+  }
 });
 
-// Express route to fetch Dealers by a particular state
+// Express route to fetch dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
-//Write your code here
+  try {
+    const state = req.params.state;
+    const documents = await Dealerships.find({ state: state });
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching dealerships by state' });
+  }
 });
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
-//Write your code here
+  try {
+    const id = req.params.id;
+    const documents = await Dealerships.find({id});
+
+    if (!documents) {
+      return res.status(404).json({ error: 'Dealer not found' });
+    }
+
+    res.json(documents);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching dealer by ID' });
+  }
 });
 
 //Express route to insert review
