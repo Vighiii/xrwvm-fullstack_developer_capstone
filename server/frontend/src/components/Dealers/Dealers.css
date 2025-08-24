@@ -16,14 +16,14 @@ table{
   .review_panel{
     display: flex;
     flex-direction: column;
-    border: solid grey;
+    border: solid rgb(158, 8, 120);
     position: relative;
     height:7cm;
     width:6cm;
     overflow-y: scroll;
     padding:.3cm;
     padding-top: 0%;
-    border-radius:10px; 
+    border-radius:40px; 
     box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.5);
     margin-bottom: .5cm;
     justify-content: space-between;
@@ -84,5 +84,5 @@ table{
 
 .review_icon:hover {
   transform: scale(1.1);
-  border: solid lightgray;
+  border: solid rgb(231, 161, 211);
 }
