@@ -1,13 +1,22 @@
-# from django.contrib import admin
-# from .models import related models
+from django.contrib import admin
+from .models import CarMake, CarModel
 
+# Optional: Inline admin for CarModel within CarMake view
+class CarModelInline(admin.TabularInline):
+    model = CarModel
+    extra = 1
 
-# Register your models here.
+# CarMake Admin with inline CarModel
+class CarMakeAdmin(admin.ModelAdmin):
+    inlines = [CarModelInline]
+    list_display = ('name', 'description')
 
-# CarModelInline class
+# CarModel Admin
+class CarModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'car_make', 'type', 'year', 'dealer_id')
+    list_filter = ('type', 'year', 'car_make')
+    search_fields = ('name',)
 
-# CarModelAdmin class
-
-# CarMakeAdmin class with CarModelInline
-
-# Register models here
+# Register models with admin
+admin.site.register(CarMake, CarMakeAdmin)
+admin.site.register(CarModel, CarModelAdmin)

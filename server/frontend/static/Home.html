@@ -1,64 +1,129 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="static/style.css">
-  <link rel="stylesheet" href="static/bootstrap.min.css">
-<script>
-
-const logout = async (e) => {
-//Include the code for logout here.
-};
-
-let checkSession = ()=>{
-  let curr_user = sessionStorage.getItem("username");
-
-  if (curr_user && curr_user !== "") {
-    document.getElementById("loginlogout").innerHTML = 
-    '<span class="homepage_links">' + curr_user +'</span>' +
-    '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
-  } else {
-    document.getElementById("loginlogout").innerHTML = 
-    '<a class="homepage_links" href="/login">Login</a>'+
-    '<a class="homepage_links"  href="/register">Register</a>'
-  }
- }
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - Best Cars</title>
+  <!-- Link the style sheets -->
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="stylesheet" href="/static/bootstrap.min.css" />
 </head>
-<body onload="checkSession()">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-  <div class="container-fluid">
-    <h2 style="padding-right: 5%;">Dealerships</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" style="font-size: larger;" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <div class="loginlink" id="loginlogout">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarText" style="align-items: center;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+        <!-- Logout Button aligned right -->
+        <button onclick="handleLogout()" class="btn btn-danger" style="margin-left: auto;">
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="card" style="width: 80%; margin: auto; margin-top: 5%;">
+    <div class="banner" name="about-header" style="padding: 20px;">
+      <h1>About Us</h1>
+      <p>
+        Welcome to Best Cars dealership, home to the best cars in North America.
+        We specialize in domestic and imported vehicles at competitive prices,
+        offering unmatched quality and customer service.
+      </p>
+    </div>
+
+    <div
+      style="display: flex; flex-direction: row; justify-content: space-between; padding: 20px;"
+    >
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="/static/person.png" alt="John Doe" />
+        <div class="card-body">
+          <p class="title">John Doe</p>
+          <p>Founder & CEO</p>
+          <p class="card-text">
+            John has over 20 years of experience in the automobile industry.
+            His passion is helping customers find their perfect car.
+          </p>
+          <p>john.doe@bestcars.com</p>
         </div>
-        </span>
+      </div>
+
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="/static/person.png" alt="Jane Smith" />
+        <div class="card-body">
+          <p class="title">Jane Smith</p>
+          <p>Sales Director</p>
+          <p class="card-text">
+            Jane is known for her excellent customer relations and knowledge of
+            domestic vehicles. She's dedicated to your satisfaction.
+          </p>
+          <p>jane.smith@bestcars.com</p>
+        </div>
+      </div>
+
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="/static/person.png" alt="Mark Jones" />
+        <div class="card-body">
+          <p class="title">Mark Jones</p>
+          <p>Technical Manager</p>
+          <p class="card-text">
+            Mark ensures all cars meet safety and performance standards.
+            He’s a trusted expert in imported models.
+          </p>
+          <p>mark.jones@bestcars.com</p>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
-<div style="display: flex;flex-direction: column;">
-<div class="card" style="width: 50%;margin-top: 50px;align-self: center;">
-  <img src="static/car_dealership.jpg" class="card-img-top" alt="...">
-  <div class="banner">
-    <h5>Welcome to our Dealerships!</h5>
-    <a href="/dealers" class="btn" style="background-color: aqua;margin:10px">View Dealerships</a>
-  </div>
-</div>
-</div>
+
+  <!-- Logout Script -->
+  <script>
+    async function handleLogout() {
+      let logout_url = window.location.origin + "/djangoapp/logout";
+      try {
+        const res = await fetch(logout_url, {
+          method: "GET",
+        });
+        const json = await res.json();
+        if (json) {
+          let username = sessionStorage.getItem("username");
+          sessionStorage.removeItem("username");
+          alert("Logging out " + username + "...");
+          window.location.href = window.location.origin;
+          window.location.reload();
+        } else {
+          alert("The user could not be logged out.");
+        }
+      } catch (error) {
+        alert("An error occurred while logging out.");
+        console.error(error);
+      }
+    }
+  </script>
+
+  <!-- Bootstrap JS (optional for navbar toggling) -->
+  <script src="/static/bootstrap.bundle.min.js"></script>
 </body>
 </html>
