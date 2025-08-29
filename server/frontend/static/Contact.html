@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    .banner-img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-bottom: 5px solid darkturquoise;
+    }
+    .info-icon {
+      width: 24px;
+      margin-right: 10px;
+    }
+    .contact-card {
+      background-color: #f0f8ff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Updated Banner image -->
+  <img src="https://images.unsplash.com/photo-1583267745918-681f43c7bd6c?auto=format&fit=crop&w=1470&q=80" class="banner-img" alt="Car showroom banner">
+
+  <div class="container" style="margin-top: 3%;">
+    <h1 class="mb-4">Contact Us</h1>
+    <p>Need help choosing your next ride? Have questions? We’re here to put you in the driver's seat.</p>
+
+    <div class="contact-card">
+      <h4>🏢 Best Cars Dealership HQ</h4>
+      <p><img class="info-icon" src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Address icon">123 Turbo Lane, Driveville, ON K1X 2B3</p>
+      <p><img class="info-icon" src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="Phone icon">+1 (800) 555-FAST</p>
+      <p><img class="info-icon" src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email icon">contact@bestcars.com</p>
+      <p><strong>Hours:</strong> Mon–Sat: 9am–7pm | Sun: Closed</p>
+    </div>
+
+    <div class="mt-4">
+      <h5>🧑‍🔧 Contact Our Team</h5>
+      <p>Need to talk to a specific department? Email us directly at <a href="mailto:support@bestcars.com">support@bestcars.com</a> and we'll get back to you within one business day.</p>
+    </div>
+
+    <!-- Embedded mock map -->
+    <div class="mt-4">
+      <h5>📍 Find Us</h5>
+      <iframe
+        src="https://maps.google.com/maps?q=123%20Turbo%20Lane,%20Ottawa&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen loading="lazy">
+      </iframe>
+    </div>
+
+  </div>
+
+</body>
+</html>
