@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dealership-django
+  labels:
+    app: dealership
+    component: django
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dealership
+      component: django
+  template:
+    metadata:
+      labels:
+        app: dealership
+        component: django
+    spec:
+      containers:
+      - name: dealership-django
+        image: dealership-django:latest
+        imagePullPolicy: Never  # For local development
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: dealership-config
+        env:
+        - name: MONGODB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: dealership-config
+              key: MONGODB_URL
+        - name: API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: dealership-config
+              key: API_BASE_URL
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dealership-django-service
+  labels:
+    app: dealership
+    component: django
+spec:
+  selector:
+    app: dealership
+    component: django
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: LoadBalancer

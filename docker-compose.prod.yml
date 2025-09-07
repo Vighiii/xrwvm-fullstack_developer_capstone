@@ -1,0 +1,68 @@
+# Production Docker Compose Configuration
+# Use this for production deployments with optimized settings
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: dealership_mongodb_prod
+    environment:
+      MONGO_INITDB_DATABASE: dealerships
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-password}
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    networks:
+      - dealership-network
+
+  dealership_api:
+    build: 
+      context: ./server/database
+      dockerfile: Dockerfile
+    container_name: dealership_api_prod
+    environment:
+      NODE_ENV: production
+      MONGODB_URL: mongodb://${MONGO_USERNAME:-admin}:${MONGO_PASSWORD:-password}@mongodb:27017/dealerships?authSource=admin
+      PORT: 3030
+    ports:
+      - "3030:3030"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server/database/data:/app/data
+    restart: unless-stopped
+    networks:
+      - dealership-network
+
+  dealership_django:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: dealership_django_prod
+    environment:
+      DEBUG: "False"
+      DJANGO_SETTINGS_MODULE: djangoproj.settings
+      PYTHONPATH: /app
+      SECRET_KEY: ${DJANGO_SECRET_KEY:-your-secret-key-change-in-production}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - dealership_api
+    volumes:
+      - ./server/static:/app/static
+      - ./server/media:/app/media
+      - django_db:/app/database
+    restart: unless-stopped
+    networks:
+      - dealership-network
+
+volumes:
+  mongodb_data:
+  django_db:
+
+networks:
+  dealership-network:
+    driver: bridge

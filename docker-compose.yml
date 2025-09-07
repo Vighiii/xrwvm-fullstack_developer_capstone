@@ -1,0 +1,50 @@
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: dealership_mongodb
+    environment:
+      MONGO_INITDB_DATABASE: dealerships
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+  dealership_api:
+    build: 
+      context: ./server/database
+      dockerfile: Dockerfile
+    container_name: dealership_api
+    environment:
+      NODE_ENV: development
+      MONGODB_URL: mongodb://admin:password@mongodb:27017/dealerships?authSource=admin
+      PORT: 3030
+    ports:
+      - "3030:3030"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server/database/data:/app/data
+
+  dealership_django:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: dealership_django
+    environment:
+      DEBUG: "True"
+      DJANGO_SETTINGS_MODULE: djangoproj.settings
+      PYTHONPATH: /app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - dealership_api
+    volumes:
+      - ./server/static:/app/static
+      - ./server/media:/app/media
+      - django_db:/app/database
+
+volumes:
+  mongodb_data:
+  django_db:

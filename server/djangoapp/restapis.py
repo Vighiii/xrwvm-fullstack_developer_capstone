@@ -1,22 +1,60 @@
-# Uncomment the imports below before you add the function code
-# import requests
+# restapis.py
 import os
+import requests
+from urllib.parse import urlencode, quote_plus
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv()
+# --- Load .env that sits next to this file ---
+DOTENV_PATH = Path(__file__).with_name(".env")
+load_dotenv(dotenv_path=DOTENV_PATH, override=True)
 
-backend_url = os.getenv(
-    'backend_url', default="http://localhost:3030")
-sentiment_analyzer_url = os.getenv(
-    'sentiment_analyzer_url',
-    default="http://localhost:5050/")
+# --- Read env vars by NAME (must match keys in .env) ---
+BACKEND_URL = os.getenv("backend_url", "").strip().rstrip("/")
+SENT_URL    = os.getenv("sentiment_analyzer_url", "").strip().rstrip("/") + "/"
 
-# def get_request(endpoint, **kwargs):
-# Add code for get requests to back end
+# Fail fast if missing
+assert BACKEND_URL, "backend_url is not set in server/djangoapp/.env"
+assert SENT_URL.strip("/"), "sentiment_analyzer_url is not set in server/djangoapp/.env"
 
-# def analyze_review_sentiments(text):
-# request_url = sentiment_analyzer_url+"analyze/"+text
-# Add code for retrieving sentiments
+print("[restapis] BACKEND_URL =", BACKEND_URL)
+print("[restapis] SENT_URL    =", SENT_URL)
 
-# def post_review(data_dict):
-# Add code for posting review
+
+def get_request(endpoint, **params):
+    """GET to the Node/Mongo backend."""
+    url = f"{BACKEND_URL}{endpoint}"
+    if params:
+        url = f"{url}?{urlencode(params)}"
+    print(f"GET {url}")
+    try:
+        resp = requests.get(url, timeout=10)
+        resp.raise_for_status()
+        return resp.json()
+    except Exception as e:
+        print("Network exception occurred:", e)
+        return None
+
+
+def analyze_review_sentiments(text: str):
+    """GET to the sentiment analyzer microservice."""
+    url = f"{SENT_URL}analyze/{quote_plus(text or '')}"
+    try:
+        resp = requests.get(url, timeout=10)
+        resp.raise_for_status()
+        return resp.json()  # expected: {"sentiment": "..."}
+    except Exception as e:
+        print("Network exception occurred:", e)
+        return {"sentiment": "neutral"}
+
+
+def post_review(data_dict: dict):
+    """POST a review to the backend."""
+    url = f"{BACKEND_URL}/insert_review"
+    try:
+        resp = requests.post(url, json=data_dict, timeout=10)
+        resp.raise_for_status()
+        return resp.json()
+    except Exception as e:
+        print("Network exception occurred:", e)
+        return {"status": "error"}

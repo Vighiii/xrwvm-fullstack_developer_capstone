@@ -1,65 +1,268 @@
 # Uncomment the required imports before adding the code
-
-# from django.shortcuts import render
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.contrib.auth.models import User
-# from django.shortcuts import get_object_or_404, render, redirect
-# from django.contrib.auth import logout
-# from django.contrib import messages
-# from datetime import datetime
+from .restapis import get_request, analyze_review_sentiments, post_review
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import logout
+from django.contrib import messages
+from datetime import datetime
 
 from django.http import JsonResponse
+from .models import CarMake, CarModel
 from django.contrib.auth import login, authenticate
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
-# from .populate import initiate
+from .populate import initiate
 
 
-# Get an instance of a logger
+
+# Get an instance of a logger (handy for debugging / audit trails)
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
-
-# Create a `login_request` view to handle sign in request
-@csrf_exempt
+# ---------------------------------------------------------
+# login_user: handle sign-in requests from the React client
+# ---------------------------------------------------------
+@csrf_exempt  # Exempt in the lab; in production you'd use proper CSRF tokens.
 def login_user(request):
-    # Get username and password from request.POST dictionary
-    data = json.loads(request.body)
-    username = data['userName']
-    password = data['password']
-    # Try to check if provide credential can be authenticated
-    user = authenticate(username=username, password=password)
-    data = {"userName": username}
-    if user is not None:
-        # If user is valid, call login method to login current user
-        login(request, user)
-        data = {"userName": username, "status": "Authenticated"}
-    return JsonResponse(data)
+    """
+    Expects JSON:
+        {"userName": "<username>", "password": "<password>"}
 
-# Create a `logout_request` view to handle sign out request
-# def logout_request(request):
-# ...
+    Success (200):
+        {"userName": "...", "status": "Authenticated"}
+
+    Failure (401):
+        {"status": "Unauthorized"}
+
+    Wrong method (405):
+        {"detail": "Method not allowed"}
+    """
+
+    # For security and clarity, accept POST only for login.
+    if request.method != "POST":
+        return JsonResponse({"detail": "Method not allowed"}, status=405)
+
+    # Parse the request body safely; return 400 if JSON is invalid.
+    try:
+        payload = json.loads(request.body or "{}")
+    except json.JSONDecodeError:
+        return JsonResponse({"detail": "Invalid JSON"}, status=400)
+
+    # The UI sends "userName"; fall back to "username" just in case.
+    username = payload.get("userName") or payload.get("username") or ""
+    password = payload.get("password") or ""
+
+    # Try authenticating against Django's auth backends.
+    user = authenticate(username=username, password=password)
+
+    if user is None:
+        # Bad credentials: do not start a session.
+        return JsonResponse({"status": "Unauthorized"}, status=401)
+
+    # Good credentials: create a session.
+    login(request, user)
+
+    # Return a small success payload that the React app expects.
+    return JsonResponse({"userName": username, "status": "Authenticated"})
+
+
+# ---------------------------------------------------------
+# logout_user: handle sign-out requests from the React client
+# ---------------------------------------------------------
+@csrf_exempt  # Exempt in the lab; in production prefer POST with CSRF.
+def logout_user(request):
+    """
+    Ends the current session.
+
+    For the lab we accept GET or POST for simplicity.
+
+    Success (200):
+        {"status": "logged out"}
+
+    Wrong method (405):
+        {"detail": "Method not allowed"}
+    """
+
+    # Allow GET/POST; reject anything else to be explicit.
+    if request.method not in ("GET", "POST"):
+        return JsonResponse({"detail": "Method not allowed"}, status=405)
+
+    # End the session (no-op if the user is already anonymous).
+    logout(request)
+
+    # Let the client clear its local auth state.
+    return JsonResponse({"status": "logged out"})
+
+
+# ---------------------------------------------------------
+# check_authentication: check if user is currently logged in
+# ---------------------------------------------------------
+@csrf_exempt
+def check_authentication(request):
+    """
+    Check if the current session has an authenticated user.
+    
+    Returns:
+        {"authenticated": true, "userName": "...", "isStaff": true/false} if logged in
+        {"authenticated": false} if not logged in
+    """
+    if request.user.is_authenticated:
+        return JsonResponse({
+            "authenticated": True,
+            "userName": request.user.username,
+            "isStaff": request.user.is_staff,
+            "isSuperuser": request.user.is_superuser
+        })
+    else:
+        return JsonResponse({"authenticated": False})
+
 
 # Create a `registration` view to handle sign up request
 # @csrf_exempt
 # def registration(request):
-# ...
+@csrf_exempt
+def register_user(request):
+    """Create a new user account (sign-up)."""
+    if request.method != "POST":
+        return JsonResponse({"detail": "Method not allowed"}, status=405)
 
-# # Update the `get_dealerships` view to render the index page with
-# a list of dealerships
-# def get_dealerships(request):
-# ...
+    # Be lenient with client field names (userName vs username, etc.)
+    try:
+        data = json.loads(request.body.decode("utf-8"))
+    except Exception:
+        return JsonResponse({"detail": "Invalid JSON"}, status=400)
+
+    username = data.get("username") or data.get("userName")
+    password = data.get("password")
+    first_name = data.get("first_name") or data.get("firstName") or ""
+    last_name  = data.get("last_name")  or data.get("lastName")  or ""
+    email      = data.get("email") or data.get("email") or ""
+
+    if not username or not password:
+        return JsonResponse({"detail": "username and password are required"}, status=400)
+
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({"status": "exists"}, status=409)
+
+    user = User.objects.create_user(
+        username=username,
+        password=password,
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+    )
+    # Optional: sign the new user in immediately
+    login(request, user)
+
+    return JsonResponse({"userName": username, "status": "Registered"}, status=201)
+
+
+# Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+def get_dealerships(request, state="All"):
+    # if ?state=XX is provided, prefer it
+    qs_state = request.GET.get("state")
+    if qs_state:
+        state = qs_state
+
+    if state in (None, "", "All"):
+        endpoint = "/fetchDealers"
+    else:
+        endpoint = f"/fetchDealers/{state}"
+
+    dealerships = get_request(endpoint)
+    return JsonResponse({"status": 200, "dealers": dealerships})
+
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
-# def get_dealer_reviews(request,dealer_id):
-# ...
+def get_dealer_reviews(request, dealer_id):
+    if not dealer_id:
+        return JsonResponse({"status": 400, "message": "Bad Request"})
+
+    # 1) Get reviews from the Node/Mongo API
+    endpoint = f"/fetchReviews/dealer/{dealer_id}"
+    reviews = get_request(endpoint) or []
+
+    # 2) ↙︎ INSERT THIS ENRICHMENT BLOCK HERE
+    enriched = []
+    if isinstance(reviews, list):
+        for r in reviews:
+            txt = (r.get("review") or "").strip()
+            result = analyze_review_sentiments(txt) if txt else {}
+            r["sentiment"] = (result or {}).get("sentiment", "neutral")
+            enriched.append(r)
+
+    # 3) Return JSON
+    return JsonResponse({"status": 200, "reviews": enriched})
+
 
 # Create a `get_dealer_details` view to render the dealer details
-# def get_dealer_details(request, dealer_id):
-# ...
+def get_dealer_details(request, dealer_id):
+    if(dealer_id):
+        endpoint = "/fetchDealer/"+str(dealer_id)
+        dealership = get_request(endpoint)
+        return JsonResponse({"status":200,"dealer":dealership})
+    else:
+        return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `add_review` view to submit a review
-# def add_review(request):
-# ...
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .restapis import post_review   # make sure this import exists
+
+@csrf_exempt
+def add_review(request):
+    # Only POST allowed
+    if request.method != "POST":
+        return JsonResponse({"status": 405, "message": "Method not allowed"}, status=405)
+
+    # TODO: Temporarily disable auth check for testing
+    # if not request.user.is_authenticated:
+    #     return JsonResponse({"status": 403, "message": "Unauthorized"}, status=403)
+
+    # Parse JSON body safely
+    try:
+        data = json.loads(request.body or b"{}")
+    except Exception:
+        return JsonResponse({"status": 400, "message": "Invalid JSON"}, status=400)
+
+    # Call backend helper
+    try:
+        resp = post_review(data)  # your helper that calls the backend service
+    except Exception as e:
+        return JsonResponse({"status": 500, "message": str(e)}, status=500)
+
+    # Treat typical backend success shapes as OK
+    ok = False
+    if isinstance(resp, dict):
+        if resp.get("ok") or resp.get("status") in (200, 201):
+            ok = True
+        elif resp.get("_id") or resp.get("id") or resp.get("insertedId"):
+            ok = True
+        elif resp:   # non-empty dict → assume success (lab backend often returns just the new doc)
+            ok = True
+
+    # Return tolerant 200 on success; 502 so the UI can show an error otherwise
+    if ok:
+        return JsonResponse({"status": 200, "body": resp}, status=200)
+    else:
+        return JsonResponse({"status": 502, "message": "backend_failed", "body": resp}, status=502)
+
+def get_cars(request):
+    """Return a list of cars (CarModel + CarMake). Populate DB on first call if empty."""
+    if request.method != "GET":
+        return JsonResponse({"detail": "Method not allowed"}, status=405)
+
+    # Seed only once if models are empty
+    if not CarModel.objects.exists():
+        try:
+            initiate()
+        except Exception as e:
+            return JsonResponse({"detail": f"Init failed: {e}"}, status=500)
+
+    car_models = CarModel.objects.select_related("car_make").all()
+    cars = [{"CarModel": cm.name, "CarMake": cm.car_make.name} for cm in car_models]
+    return JsonResponse({"cars": cars})
