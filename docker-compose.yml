@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: dealership_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: dealerships
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - "27017:27017"
+    networks:
+      - dealership_network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  dealership_api:
+    build: 
+      context: ./server/database
+      dockerfile: Dockerfile
+    container_name: dealership_api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGODB_URL: mongodb://admin:password@mongodb:27017/dealerships?authSource=admin
+      PORT: 3030
+    ports:
+      - "3030:3030"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - dealership_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3030/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - ./server/database/data:/app/data
+
+  dealership_django:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: dealership_django
+    restart: unless-stopped
+    environment:
+      DEBUG: "False"
+      DJANGO_SETTINGS_MODULE: djangoproj.settings
+      PYTHONPATH: /app
+    ports:
+      - "8000:8000"
+    depends_on:
+      dealership_api:
+        condition: service_healthy
+    networks:
+      - dealership_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 45s
+    volumes:
+      - ./server/static:/app/static
+      - ./server/media:/app/media
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+
+networks:
+  dealership_network:
+    driver: bridge
+    name: dealership_network
