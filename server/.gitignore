@@ -1,5 +1,8 @@
 **/__pycache__/
 *.py[cod]
-.env
+# .env - Default development .env is included in repo
+.env.local
+.env.production
+.env.*.local
 server/db.sqlite3
 server/djangoenv/

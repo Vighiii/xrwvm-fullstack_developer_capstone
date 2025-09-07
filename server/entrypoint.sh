@@ -31,6 +31,12 @@ warning() {
 
 # Function to wait for API service with retry logic
 wait_for_api() {
+    # Skip API health check for local development
+    if [ "${DEBUG:-}" = "True" ]; then
+        log "Skipping API health check in development mode"
+        return 0
+    fi
+    
     local max_attempts=30
     local attempt=1
     local api_url="http://dealership_api:3030/health"
@@ -56,13 +62,24 @@ wait_for_api() {
 validate_django() {
     log "Validating Django configuration..."
     
-    if ! python manage.py check --deploy; then
-        error "Django configuration validation failed"
-        return 1
+    # Skip deployment check in development mode
+    if [ "${DEBUG:-}" = "True" ]; then
+        if python manage.py check; then
+            success "Django configuration is valid (development mode)"
+            return 0
+        else
+            error "Django configuration validation failed"
+            return 1
+        fi
+    else
+        if python manage.py check --deploy; then
+            success "Django configuration is valid"
+            return 0
+        else
+            error "Django configuration validation failed"
+            return 1
+        fi
     fi
-    
-    success "Django configuration is valid"
-    return 0
 }
 
 # Function to collect static files
@@ -114,6 +131,40 @@ else:
     fi
 }
 
+# Function to create admin user if not exists
+create_admin_user() {
+    log "Checking for admin user..."
+    
+    python manage.py shell -c "
+from django.contrib.auth.models import User
+import os
+
+username = 'emifeaustin0'
+email = 'emifeaustin0909@gmail.com'
+password = 'admin123'
+
+try:
+    admin_user = User.objects.get(username=username)
+    print(f'Admin user {username} already exists')
+except User.DoesNotExist:
+    User.objects.create_superuser(username=username, email=email, password=password)
+    print(f'Created admin user: {username} with email: {email}')
+    
+# Ensure admin user has correct email
+admin_user = User.objects.get(username=username)
+if admin_user.email != email:
+    admin_user.email = email
+    admin_user.save()
+    print(f'Updated admin email to: {email}')
+"
+    
+    if [ $? -eq 0 ]; then
+        success "Admin user setup completed"
+    else
+        warning "Admin user setup failed, but continuing..."
+    fi
+}
+
 # Main execution
 main() {
     log "Starting Django application entrypoint..."
@@ -144,6 +195,9 @@ main() {
     
     # Populate initial data
     populate_data
+    
+    # Create admin user
+    create_admin_user
     
     # Start the application
     log "Starting Django development server..."
