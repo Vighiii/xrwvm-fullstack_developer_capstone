@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dealership-config
+  labels:
+    app: dealership
+data:
+  DJANGO_SECRET_KEY: "django-insecure-k8s-development-key-change-in-production"
+  DEBUG: "True"
+  ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0,dealership-django-service"
+  MONGO_USERNAME: "admin"
+  MONGO_PASSWORD: "password"
+  MONGODB_URL: "mongodb://admin:password@mongodb-service:27017/dealership?authSource=admin"
+  API_BASE_URL: "http://dealership-api-service:3030"
+  DJANGO_BASE_URL: "http://dealership-django-service:8000"
+  NODE_ENV: "development"
+  REACT_APP_API_URL: "http://localhost:3030"
+  REACT_APP_DJANGO_URL: "http://localhost:8000"
