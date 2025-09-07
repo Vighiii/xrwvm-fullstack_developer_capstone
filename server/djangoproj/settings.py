@@ -34,11 +34,21 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
     "[::1]",
+    "*",  # Allow all hosts for cloud deployment
     ".theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai",
+    ".gitpod.io",
+    ".codespaces.github.com",
+    ".repl.co",
+    ".stackblitz.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai",
+    "https://*.gitpod.io",
+    "https://*.github.dev",
+    "https://*.codespaces.github.com",
+    "https://*.repl.co",
+    "https://*.stackblitz.com",
 ]
 
 REST_FRAMEWORK = {

@@ -1,15 +1,20 @@
 FROM node:18.12.1-bullseye-slim
 
+WORKDIR /app
+
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 RUN npm install -g npm@9.1.3
 
-ADD package.json .
-ADD app.js .
-ADD review.js .
-ADD dealership.js .
-ADD data/dealerships.json .
-ADD data/reviews.json .
+# Copy package.json first for better caching
+COPY package.json ./
+
+# Install dependencies
+RUN npm install --production
+
+# Copy application code
 COPY . .
-RUN npm install
 
 EXPOSE 3030
 

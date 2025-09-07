@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = process.env.PORT || 3030;
-const MONGO_URL = process.env.MONGO_URL || "mongodb://mongo_db:27017/";
+const MONGO_URL = process.env.MONGODB_URL || process.env.MONGO_URL || "mongodb://admin:password@dealership_mongodb:27017/dealerships?authSource=admin";
 
 // ------- middleware -------
 app.use(cors());
@@ -55,7 +55,9 @@ const Dealerships = require("./dealership");
 })();
 
 // ------- routes -------
+// ------- endpoints -------
 app.get("/", (_req, res) => res.send("Welcome to the Mongoose API"));
+app.get("/health", (_req, res) => res.json({ status: "ok", message: "API is healthy" }));
 
 app.get("/fetchReviews", async (_req, res) => {
   try {
