@@ -23,17 +23,27 @@
 ### One-Command Deployment
 
 ```bash
-# Clone and deploy in one go
+# Clone the repository
 git clone https://github.com/emiflair/xrwvm-fullstack_developer_capstone.git
 cd xrwvm-fullstack_developer_capstone
-git checkout containerize-k8s
+
+# Deploy with one command!
 ./quick-deploy.sh
 ```
 
-That's it! Your application will be running at:
-- **Main App**: http://localhost:8000
-- **API Service**: http://localhost:3030  
-- **MongoDB**: mongodb://localhost:27017
+**That's it!** Your application will be running at:
+- **🌐 Main App**: http://localhost:8000
+- **📊 API Service**: http://localhost:3030  
+- **🗄️ MongoDB**: mongodb://localhost:27017
+
+### Alternative Quick Start
+```bash
+# For development - faster startup
+./simple-start.sh
+
+# Check health status
+./health-check.sh
+```
 
 ## 📚 Deployment Scripts
 
