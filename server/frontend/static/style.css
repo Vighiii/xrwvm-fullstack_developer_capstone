@@ -7,8 +7,8 @@ img{
   border: rgb(103, 102, 105) 3px solid;
   display: flex;  
   flex-direction: column;
-  margin-left:5%;
-  margin-right:5%;
+  margin-left:2%;
+  margin-right: 2%;
   margin-top: 1%;
   margin-bottom: 1%;
 }
@@ -28,21 +28,21 @@ img{
 }
 .details{
   font-size: 20px;
-  color: rgb(97, 64, 128);
+  color: #F5D48A;
   padding:20px;
 }
 
 .title{
   font-size: 20px;
-  background-color: rgb(97, 64, 128);
+  background-color: #F5D48A;
   color: white;
   text-align: center;
-  margin:20px;
-  padding:5px;
+  margin:0px;
+  padding:0px;
 }
 
 .homepage_links{
-  color:  rgb(97, 64, 128);
+  color:  #F5D48A;
   padding: 25%;
   font-size: larger;
   }
@@ -57,8 +57,27 @@ img{
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: center;
-  flex:1
+  flex:1;
+}
+
+.about-banner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex:1;
+}
+
+.contact-banner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex:1;
 }
 
 .form_panel {
@@ -75,6 +94,10 @@ img{
   background-color: black;
 }
 
+.navbar {
+    color: white;
+}
+
 .navitems{
   display: flex;
   flex-direction: row;
@@ -82,12 +105,13 @@ img{
   flex: 1;
   justify-content: flex-start;
   justify-self: center;
+  color: white;
 }
 
 .nav_item{
   margin-left:15px;
   font-size: 20px;
-  color: black;
+  color: white;
   align-self: center;
 }
 
@@ -118,9 +142,22 @@ img{
 .img_icon {
   align-self: center;
     width:40px;
-    background-color:#0C9;
+    background-color:#F5D48A;
     color:#FFF;
     border-radius:50px;
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
+}
+
+.btn {
+    color: white;
+}
+
+.contact-header{
+    margin-left: .5 cm;
+}
+
+.contact-info{
+    text-align:left;
+    margin-left: 0.6cm;
 }

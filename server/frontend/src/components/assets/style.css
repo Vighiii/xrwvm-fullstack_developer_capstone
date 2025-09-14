@@ -28,13 +28,13 @@ img{
 }
 .details{
   font-size: 20px;
-  color: rgb(97, 64, 128);
+  color: #F5D48A;
   padding:20px;
 }
 
 .title{
   font-size: 20px;
-  background-color: rgb(97, 64, 128);
+  background-color: #F5D48A;
   color: white;
   text-align: center;
   margin:20px;
@@ -42,7 +42,7 @@ img{
 }
 
 .homepage_links{
-  color:  rgb(97, 64, 128);
+  color:  #F5D48A;
   padding: 25%;
   font-size: larger;
   }
@@ -86,13 +86,13 @@ img{
 .nav_item{
   margin-left:15px;
   font-size: 20px;
-  color: black;
+  color: #F5D48A;
   align-self: center;
 }
 
 .username{
-  font: 30px sans-serif;
-  color:black;
+  font: 20px sans-serif;
+  color:#F5D48A;
   justify-content: 'flex-end';
   align-self:flex-end;
   vertical-align: middle;
@@ -117,7 +117,7 @@ img{
 .img_icon {
   align-self: center;
     width:40px;
-    background-color:#0C9;
+    background-color:#F59F8A;
     color:#FFF;
     border-radius:50px;
     text-align:center;

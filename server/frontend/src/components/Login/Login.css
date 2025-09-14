@@ -45,7 +45,8 @@
 .action_button{
   cursor: pointer;
   font-size: large;
-  color: rgb(97, 64, 128);
+  color: white;
+  background-color: #F5D48A;
   border-radius: 10px;
   height:40px;
   padding-left:.5cm;
@@ -54,7 +55,7 @@
 }
 
 .submit:hover {
-  background-color: wheat;
+  background-color: #F58AAA;
 }
 
 .small_header{
