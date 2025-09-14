@@ -28,6 +28,12 @@ SECRET_KEY =\
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+# IF YOU HOST IT DO IT LIKE THIS...
+# ALLOWED_HOSTS=['localhost','<your application URL here>']
+# like -- https://blah-blah-blah.cognitiveclass.ai
+# CSRF_TRUSTED_ORIGINS=['<your application URL here>']
+
 ALLOWED_HOSTS = []
 CSRF_TRUSTED_ORIGINS = []
 
@@ -58,10 +64,23 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'djangoproj.urls'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/static'),
+    os.path.join(BASE_DIR, 'frontend/build'),
+    os.path.join(BASE_DIR, 'frontend/build/static'),
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'frontend/static'),
+            os.path.join(BASE_DIR, 'frontend/build'),
+            os.path.join(BASE_DIR, 'frontend/build/static'),
+
+            ],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,7 +109,8 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'django.contrib.auth.password_validation.'
+        'UserAttributeSimilarityValidator',
     },
     {
         'NAME':
@@ -134,5 +154,6 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = []
-
+# This is a Django setting that specifies additional
+# directories where Django will look for static files
+# in addition to the default static directory in each app.
