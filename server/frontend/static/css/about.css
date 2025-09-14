@@ -1,0 +1,51 @@
+/* Already defined in your file */
+/* Basic Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* About and Team Section */
+  .about-section,
+  .team-section {
+    text-align: center;
+  }
+  
+  .team-cards .main-card {
+    max-width: 350px;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .main-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .main-card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .main-card .card-title {
+    color: #007bff;
+  }
+  
+  /* Text and Icon Styling */
+  .card-subtitle {
+    font-size: 0.9em;
+    color: #6c757d;
+  }
+  
+  .card-text {
+    font-size: 0.9em;
+    color: #6c757d;
+  }
+  
+  .card i {
+    color: #007bff;
+    margin-right: 5px;
+  }
+  

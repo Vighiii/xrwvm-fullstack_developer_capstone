@@ -1,0 +1,101 @@
+/* Base Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+p {
+    color: #7f8c8d;
+}
+
+/* Navigation Bar */
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    background-color: #2c3e50;
+    margin: 0;
+}
+
+nav ul li {
+    padding: 15px 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a.active {
+    background-color: #34495e;
+    border-radius: 5px;
+}
+
+/* Contact Page Styling */
+.contact-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.contact-container h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.contact-container p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+/* Contact Info Blocks */
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.info-block {
+    text-align: center;
+    padding: 20px;
+}
+
+.info-block i {
+    font-size: 2em;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.info-block h2 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+.info-block p {
+    font-size: 1.1em;
+    color: #7f8c8d;
+}
+
+.info-block i, .info-block h2, .info-block p {
+    transition: transform 0.2s;
+}
+
+.info-block:hover i,
+.info-block:hover h2,
+.info-block:hover p {
+    transform: scale(1.05);
+    color: #3498db;
+}

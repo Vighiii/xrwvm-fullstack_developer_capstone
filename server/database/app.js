@@ -13,19 +13,16 @@ const dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'))
 
 mongoose.connect("mongodb://mongo_db:27017/",{'dbName':'dealershipsDB'});
 
-
+const Dealerships = require('./dealership');
 const Reviews = require('./review');
 
-const Dealerships = require('./dealership');
+
 
 try {
-  Reviews.deleteMany({}).then(()=>{
-    Reviews.insertMany(reviews_data['reviews']);
-  });
-  Dealerships.deleteMany({}).then(()=>{
-    Dealerships.insertMany(dealerships_data['dealerships']);
-  });
-  
+  await Dealerships.deleteMany({});
+  await Dealerships.insertMany(dealerships_data['dealerships']);
+  await Reviews.deleteMany({});
+  await Reviews.insertMany(reviews_data['reviews']);
 } catch (error) {
   res.status(500).json({ error: 'Error fetching documents' });
 }
@@ -58,18 +55,44 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
-//Write your code here
+  try {
+    console.log("fetchDealers endpoint hit");
+    const dealers = await Dealerships.find();
+    res.json(dealers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 // Express route to fetch Dealers by a particular state
-app.get('/fetchDealers/:state', async (req, res) => {
-//Write your code here
+app.get('/fetchDealer/:state', async (req, res) => {
+  try {
+    const dealer = await Dealerships.find({st: req.params.state});
+    if (dealer) {
+      res.status(200).json(dealer);
+    } else {
+      res.status(404).json({ message: 'Dealer not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
+
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
-//Write your code here
+  try {
+    const dealer = await Dealerships.find({id: req.params.id});
+    if (dealer) {
+      res.status(200).json(dealer);
+    } else {
+      res.status(404).json({ message: 'Dealer not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
+
 
 //Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
