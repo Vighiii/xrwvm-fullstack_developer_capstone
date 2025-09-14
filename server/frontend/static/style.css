@@ -124,3 +124,27 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+.horizontal-line {
+  height: 1px !important;
+  background-color: #eee !important;
+  width: 90% !important;
+  margin: 10px auto !important;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.vertical-line {
+  width: 2px !important;
+  background-color: #555!important;
+  height: 470px !important;
+  margin: 10px auto !important;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.contact-detail{
+  font-family: Arial, Helvetica, sans-serif; /* Example font-family */
+  color: #7676ec; /* Example color */
+  font-size: 20px; /* Adjust size as needed */
+  text-align: center; /* Optional: centers the text */
+  line-height: 1.2; /* Optional: adjusts line spacing */
+}
