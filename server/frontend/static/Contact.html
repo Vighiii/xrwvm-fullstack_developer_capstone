@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dealerships</title>
+  <!-- Link the style sheet here -->
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+<style>
+  .contactus-blue {
+    color: rgb(83, 83, 179) !important;
+    font-size: medium;
+    line-height: 1.2; /* Valeur typique pour réduire l'espacement */
+  }
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 class="text-blue-bold" style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-blue-bold" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-blue-bold" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-blue-bold" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="card" style="width:70%; margin:auto; margin-top: 2%; border-radius:50px;">
+    <div class="card-body">
+      <!-- Première image -->
+      <div class="text-center">
+  <img src="/static/cars.jpeg" alt="Card image" class="card-img-top" style="display: inline-block; width: 50%; border-radius: 2px;">
+</div>
+
+      <!-- Ligne horizontale -->
+      <hr>
+<!-- Bloc contact avec Bootstrap -->
+
+        <div class="row align-items-center">
+        <!-- Image contactus -->
+        <div class="col-md-4 text-center" style="border-right: 4px solid #121212;">
+          <img src="/static/contactus.png" alt="Card image" class="card-img-top">
+        </div>
+
+
+  <!-- Texte contact -->
+  <div class="col-md-6 text-center contactus-blue">
+    <div class="mb-3">
+    <h5 class="card-title contactus-blue">Contact Customer Service</h5>
+    <p class="card-text contactus-blue">support@bestcars.com</p>
+    </div>
+    <div class="mb-3">
+    <h5 class="card-title contactus-blue">Contact our National Advertising team</h5>
+    <p class="card-text contactus-blue">NationalSales@bestcars.com</p>
+    </div>
+    <div class="mb-3">
+    <h5 class="card-title contactus-blue">Contact our Public Relations team</h5>
+    <p class="card-text contactus-blue">PRO@bestcars.com</p>
+    </div>
+    <div class="mb-3">
+    <h5 class="card-title contactus-blue">Contact the bestcars.com offices</h5>
+    <p class="card-text contactus-blue">312-611-111</p>
+    </div>
+    <div>
+    <h5 class="card-title contactus-blue">Become a bestcars.com car dealer</h5>
+    <p class="card-text contactus-blue">
+      <a class="contactus-blue" href="https://growwithbestcars.com" target="_blank">Visit growwithbestcars.com</a>
+    </p>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
