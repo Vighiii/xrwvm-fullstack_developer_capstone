@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  express-service:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/dealerships
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+
+  sentiment:
+    # Placeholder image; replace with your sentiment service image or build path
+    image: your-sentiment-image-or-placeholder
+    # If you have a local Dockerfile for sentiment, replace the image line with:
+    # build: ./server/djangoapp/microservices/sentiment
+    ports:
+      - "8080:8080"
+
+  django:
+    build: ./server/djangoapp/microservices
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./server/djangoapp/microservices:/app:cached
+    environment:
+      - DJANGO_SETTINGS_MODULE=project.settings
+      - DEALERS_SERVICE_URL=http://express-service:3000
+      - SENTIMENT_SERVICE_URL=http://sentiment:8080
+    ports:
+      - "8000:8000"
+    depends_on:
+      - express-service
+      - sentiment
+
+volumes:
+  mongo-data:
