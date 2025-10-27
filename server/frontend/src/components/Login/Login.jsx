@@ -20,13 +20,17 @@ const Login = ({ onClose }) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            "userName": userName,
+            "username": userName,
             "password": password
         }),
     });
     
     const json = await res.json();
-    if (json.status != null && json.status === "Authenticated") {
+    if (json.status != null && json.status === true) {
+        sessionStorage.setItem('username', json.userName);
+        setOpen(false);        
+    }
+    else if (json.status != null && json.status === "Authenticated") {
         sessionStorage.setItem('username', json.userName);
         setOpen(false);        
     }

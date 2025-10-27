@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  # MongoDB service
+  mongodb:
+    image: mongo:latest
+    container_name: dealership_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - dealership_network
+
+  # Node.js API service
+  api:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: dealership_api
+    ports:
+      - "3030:3030"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/dealership
+    networks:
+      - dealership_network
+
+  # Django application
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dealership_django
+    ports:
+      - "8000:8000"
+    depends_on:
+      - api
+    environment:
+      - DEBUG=False
+      - ALLOWED_HOSTS=localhost,127.0.0.1,django
+      - API_BASE_URL=http://api:3030
+    networks:
+      - dealership_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  dealership_network:
+    driver: bridge

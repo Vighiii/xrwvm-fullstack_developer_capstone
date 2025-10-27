@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Dealerships{% endblock %}
+
+{% block content %}
+<div class="card" style="width: 80%;margin: auto; margin-top:5%;">
+    <div class="banner" name="about-header">
+        <h1 style="text-align: center; padding: 20px;">About Us</h1>
+        <p style="text-align: center; padding: 0 20px;">Welcome to Best Cars dealership, home to the best cars in North America. We deal in sale of domestic and imported cars at reasonable prices.</p>
+    </div>
+    <div style="display: flex;flex-direction: row; margin:auto; gap: 20px; padding: 20px;">
+        <div class="card" style="width: 30%;">
+            <img class="card-img-top" src="{% static 'person1.png' %}" alt="Card image">
+            <div class="card-body">
+                <p class="title"><strong>John Smith</strong></p>
+                <p>Sales Manager</p>
+                <p class="card-text">Experienced sales professional with over 10 years in automotive industry. Dedicated to customer satisfaction.</p>
+                <p>john.smith@dealership.com</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 30%;">
+            <img class="card-img-top" src="{% static 'person2.png' %}" alt="Card image">
+            <div class="card-body">
+                <p class="title"><strong>Sarah Johnson</strong></p>
+                <p>Finance Specialist</p>
+                <p class="card-text">Expert in automotive financing and insurance. Helps customers find the best deals and payment options.</p>
+                <p>sarah.johnson@dealership.com</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 30%;">
+            <img class="card-img-top" src="{% static 'person3.png' %}" alt="Card image">
+            <div class="card-body">
+                <p class="title"><strong>Mike Davis</strong></p>
+                <p>Service Manager</p>
+                <p class="card-text">Certified automotive technician with expertise in all major car brands. Ensures quality service delivery.</p>
+                <p>mike.davis@dealership.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
