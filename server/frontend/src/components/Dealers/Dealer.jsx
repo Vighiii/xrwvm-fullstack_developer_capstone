@@ -24,17 +24,16 @@ const Dealer = () => {
   let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
   let post_review = root_url+`postreview/${id}`;
   
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
+  const get_dealer = async () => {
+    const res = await fetch(dealer_url, { method: "GET" });
     const retobj = await res.json();
-    
+    console.log("Dealer API response:", retobj);  // 👈 Add this
+
     if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
+      // If retobj.dealer is already an object
+      setDealer(retobj.dealer[0]);
     }
-  }
+  };
 
   const get_reviews = async ()=>{
     const res = await fetch(reviews_url, {
@@ -72,7 +71,7 @@ return(
       <Header/>
       <div style={{marginTop:"10px"}}>
       <h1 style={{color:"grey"}}>{dealer.full_name}{postReview}</h1>
-      <h4  style={{color:"grey"}}>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
+      <h4 style={{color:"grey"}}>{dealer.city}, {dealer.address}, Zip - {dealer.zip}, {dealer.state}</h4>
       </div>
       <div class="reviews_panel">
       {reviews.length === 0 && unreviewed === false ? (
