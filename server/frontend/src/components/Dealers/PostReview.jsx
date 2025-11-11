@@ -5,6 +5,8 @@ import "../assets/style.css";
 import Header from '../Header/Header';
 
 
+
+
 const PostReview = () => {
   const [dealer, setDealer] = useState({});
   const [review, setReview] = useState("");
@@ -101,11 +103,13 @@ const PostReview = () => {
       </div>
       <div className='input_field'>
       Car Make 
-      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
+      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)} value={model}>
       <option value="" selected disabled hidden>Choose Car Make and Model</option>
-      {carmodels.map(carmodel => (
+      {/* {carmodels.map(carmodel => (
           <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
-      ))}
+      ))} */}
+        <option value="NISSAN XTRAIL">NISSAN XTRAIL</option>
+        <option value="Toyota Camry">Toyota Camry</option>
       </select>        
       </div >
 
