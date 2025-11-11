@@ -124,3 +124,57 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+
+image-container {
+    position: relative;
+    flex: 1;
+    max-width: 50%;
+    
+    
+}
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.sample-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    pointer-events: none;
+}
+.contact-info {
+    flex: 1;
+    padding-left: 20px;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    
+    
+}
+.contact-info p {
+    margin: 5px 0;
+    margin-left: 50px;
+}
+.contact-icon {
+    width: 50px;
+    margin-bottom: 20px;
+    position: left;
+}
+
+.contactx {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 1200px;
+    height: 600px;
+    margin: 50px auto 0 auto;
+}
