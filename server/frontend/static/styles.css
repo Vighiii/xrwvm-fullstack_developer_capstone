@@ -1,0 +1,54 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	background-image: url(https://img.freepik.com/premium-photo/new-cars-displayed-luxury-showroom-cars-sale_599862-10180.jpg);
+	background-size: auto;
+}
+
+.container {
+	width: 80%;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+form {
+	margin-top: 20px;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+input[type="text"], input[type="email"], textarea {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	background-color: #3e8e41;
+}
+
+p {
+	margin-bottom: 20px;
+}
