@@ -1,14 +1,14 @@
 table{
     margin:5px;
     padding:10px;
-    border: grey solid 1px;
+    border: rgb(135, 124, 236) solid 1px;
     width:100%
   }
   
   td{
     padding:10px;
     align-self: center;
-    border:solid grey .5px;
+    border:solid rgb(54, 179, 75) .5px;
     text-align: center;
     font-size: large;
   }
@@ -16,7 +16,7 @@ table{
   .review_panel{
     display: flex;
     flex-direction: column;
-    border: solid grey;
+    border: solid rgb(180, 32, 32);
     position: relative;
     height:7cm;
     width:6cm;
