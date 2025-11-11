@@ -1,45 +1,43 @@
-/*jshint esversion: 8 */
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const reviews = new Schema({
+const dealerships = new Schema({
 	id: {
     type: Number,
     required: true,
 	},
-	name: {
+	city: {
     type: String,
     required: true
   },
-  dealership: {
-    type: Number,
-    required: true,
-  },
-  review: {
+  state: {
     type: String,
     required: true
   },
-  purchase: {
-    type: Boolean,
-    required: true
-  },
-  purchase_date: {
+  address: {
     type: String,
     required: true
   },
-  car_make: {
+  zip: {
     type: String,
     required: true
   },
-  car_model: {
+  lat: {
     type: String,
     required: true
   },
-  car_year: {
-    type: Number,
+  long: {
+    type: String,
     required: true
   },
+  short_name: {
+    type: String,
+  },
+  full_name: {
+    type: String,
+    required: true
+  }
 });
 
-module.exports = mongoose.model('reviews', reviews);
+module.exports = mongoose.model('dealerships', dealerships);
