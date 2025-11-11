@@ -92,22 +92,33 @@ const PostReview = () => {
 
   return (
     <div>
-      <Header/>
-      <div  style={{margin:"5%"}}>
-      <h1 style={{color:"darkblue"}}>{dealer.full_name}</h1>
-      <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
-      <div className='input_field'>
-      Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
-      </div>
-      <div className='input_field'>
-      Car Make 
-      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
-      <option value="" selected disabled hidden>Choose Car Make and Model</option>
-      {carmodels.map(carmodel => (
-          <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
-      ))}
-      </select>        
-      </div >
+      <Header />
+      <div style={{ margin: "5%" }}>
+        <h1 style={{ color: "darkblue" }}>{dealer.full_name}</h1>
+        <textarea
+          id="review"
+          cols="50"
+          rows="7"
+          onChange={(e) => setReview(e.target.value)}
+          placeholder="Write your review here..."
+        ></textarea>
+        <div className="input_field">
+          Purchase Date
+          <input type="date" onChange={(e) => setDate(e.target.value)} />
+        </div>
+        <div className="input_field">
+          Car Make and Model
+          <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
+            <option value="" disabled selected hidden>
+              Choose Car Make and Model
+            </option>
+            {carmodels.map((carmodel, index) => (
+              <option key={index} value={carmodel.CarMake + " " + carmodel.CarModel}>
+                {carmodel.CarMake} {carmodel.CarModel}
+              </option>
+            ))}
+          </select>
+        </div>
 
       <div className='input_field'>
       Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
