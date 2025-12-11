@@ -1,10 +1,12 @@
 {% load static %}
+
 <html>
 <head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
 </head>
-
 <body>
 <div>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
@@ -13,7 +15,6 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" style="font-size: larger;" href="/">Home</a></li>
@@ -23,28 +24,27 @@
       </div>
     </div>
   </nav>
-  
-  <div class="card" style="width: 80%; margin: auto; margin-top:5%;">
-    
+
+  <div class="card" style="width: 80%; margin:auto; margin-top:5%;">
     <div class="banner" name="about-header">
       <h1>About Us</h1>
-      Welcome to Best Cars dealership, home to the best cars in North America. We deal in sale of domestic and imported cars at reasonable prices.
+      <p>Welcome to Best Cars dealership, home to the best cars in North America. We deal in sale of domestic and imported cars at reasonable prices.</p>
     </div>
 
-    <div style="display: flex; flex-direction: row; margin:auto">
-
+    <div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 20px;">
+      
       <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="{% static 'person.png' %}" alt="Card image">
+        <img class="card-img-top" src="{% static 'jack.png' %}" alt="Jack Carter">
         <div class="card-body">
           <p class="title">Jack Carter</p>
           <p>Sales Manager</p>
-          <p class="card-text">jack has over 10 years of experience helping customers find the perfect car. He leads the sales team with passion and professionalism.</p>
+          <p class="card-text">Jack has over 10 years of experience helping customers find the perfect car. He leads the sales team with passion and professionalism.</p>
           <p>jack.carter@bestcars.com</p>
         </div>
       </div>
 
       <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="{% static 'person.png' %}" alt="Card image">
+        <img class="card-img-top" src="{% static 'michael.png' %}" alt="Michael Adams">
         <div class="card-body">
           <p class="title">Michael Adams</p>
           <p>Head of Imports</p>
@@ -54,11 +54,11 @@
       </div>
 
       <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="{% static 'person.png' %}" alt="Card image">
+        <img class="card-img-top" src="{% static 'marco.png' %}" alt="Marco Lee">
         <div class="card-body">
           <p class="title">Marco Lee</p>
           <p>Customer Service Lead</p>
-          <p class="card-text">Marco is dedicated to delivering exceptional customer service. he helps clients with support, appointments, and after-sales assistance.</p>
+          <p class="card-text">Marco is dedicated to delivering exceptional customer service. He helps clients with support, appointments, and after-sales assistance.</p>
           <p>marco.lee@bestcars.com</p>
         </div>
       </div>
@@ -68,3 +68,4 @@
 </div>
 </body>
 </html>
+
