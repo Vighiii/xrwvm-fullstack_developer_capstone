@@ -179,3 +179,14 @@
 .form_panel a:hover {
   color: #fff;
 }
+
+.loginlink {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.loginlink:hover {
+  color: #ccc;
+}
