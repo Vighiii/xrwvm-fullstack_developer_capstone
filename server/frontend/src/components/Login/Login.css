@@ -52,8 +52,8 @@
 }
 
 .input_field:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.15);
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
   outline: none;
 }
 
@@ -62,7 +62,7 @@
   font-size: 14px;
   font-weight: 600;
   color: #000;
-  background: #00d4ff;
+  background: #fff;
   border: none;
   border-radius: 6px;
   height: 40px;
@@ -85,7 +85,7 @@
 .username {
   font-size: 14px;
   font-weight: 500;
-  color: #00d4ff;
+  color: #fff;
   padding: 6px 14px;
   background: #1a1a1a;
   border: 1px solid #333;
@@ -140,8 +140,8 @@
 }
 
 .form_panel input:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
+  border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
   outline: none;
 }
 
@@ -156,7 +156,7 @@
   font-size: 15px;
   font-weight: 600;
   color: #000;
-  background: #00d4ff;
+  background: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -170,7 +170,7 @@
 .form_panel a {
   display: inline-block;
   margin-top: 24px;
-  color: #00d4ff;
+  color: #fff;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;

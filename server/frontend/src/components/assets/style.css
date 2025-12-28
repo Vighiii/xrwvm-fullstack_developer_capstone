@@ -78,7 +78,7 @@ img {
 
 /* Homepage Links */
 .homepage_links {
-  color: #00d4ff;
+  color: #fff;
   padding: 20px;
   font-size: 15px;
   font-weight: 500;
@@ -167,7 +167,7 @@ img {
 .username {
   font-size: 14px;
   font-weight: 500;
-  color: #00d4ff;
+  color: #fff;
   padding: 6px 14px;
   background: #1a1a1a;
   border: 1px solid #333;
@@ -216,7 +216,7 @@ button, .btn {
 
 .btn-primary {
   color: #000;
-  background: #00d4ff;
+  background: #fff;
 }
 
 .btn-primary:hover {
@@ -244,7 +244,7 @@ h1 {
 
 /* Links */
 a {
-  color: #00d4ff;
+  color: #fff;
   text-decoration: none;
   transition: color 0.2s ease;
 }

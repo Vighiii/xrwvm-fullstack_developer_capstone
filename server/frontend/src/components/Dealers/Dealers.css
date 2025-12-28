@@ -41,7 +41,7 @@ tr:last-child td {
 }
 
 td a {
-  color: #00d4ff;
+  color: #fff;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -64,8 +64,8 @@ select {
 }
 
 select:hover, select:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 /* Review Panel Cards */
@@ -146,7 +146,7 @@ select:hover, select:focus {
   font-size: 15px;
   font-weight: 600;
   color: #000;
-  background: #00d4ff;
+  background: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -180,8 +180,8 @@ select:hover, select:focus {
 
 .input_field input:focus,
 .input_field select:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
   outline: none;
 }
 
@@ -200,7 +200,7 @@ textarea {
 }
 
 textarea:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
   outline: none;
 }
