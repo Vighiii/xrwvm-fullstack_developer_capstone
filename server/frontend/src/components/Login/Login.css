@@ -1,13 +1,10 @@
-/* Modern Login Page Styling */
+/* Sleek Modern Dark Login */
 .navcontainer {
   display: flex;
   flex-direction: row;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0d0d0d;
   padding: 0 20px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  border-bottom: 1px solid #222;
 }
 
 .navitems {
@@ -20,17 +17,18 @@
 }
 
 .nav_item {
-  font-size: 16px;
-  color: #fff;
+  font-size: 15px;
+  color: #888;
   text-decoration: none;
   font-weight: 500;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .nav_item:hover {
-  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  background: #1a1a1a;
 }
 
 .input_panel {
@@ -42,44 +40,42 @@
 }
 
 .input_field {
-  height: 42px;
-  width: 200px;
-  font-size: 15px;
+  height: 40px;
+  width: 180px;
+  font-size: 14px;
   padding: 0 14px;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #e0e0e0;
   transition: all 0.2s ease;
 }
 
 .input_field:focus {
-  border-color: #fff;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  border-color: #00d4ff;
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.15);
   outline: none;
 }
 
 .action_button {
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  color: #667eea;
-  background: #fff;
+  color: #000;
+  background: #00d4ff;
   border: none;
-  border-radius: 10px;
-  height: 42px;
-  padding: 0 24px;
+  border-radius: 6px;
+  height: 40px;
+  padding: 0 20px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .action_button:hover {
-  background: #f8f9ff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  background: #fff;
 }
 
 .small_header {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #fff;
   margin: 0;
@@ -87,11 +83,12 @@
 }
 
 .username {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  color: #fff;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.15);
+  color: #00d4ff;
+  padding: 6px 14px;
+  background: #1a1a1a;
+  border: 1px solid #333;
   border-radius: 20px;
 }
 
@@ -100,81 +97,85 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 70px);
   padding: 40px 20px;
-  background: linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
+  background: #0a0a0a;
 }
 
 /* Modern Form Panel */
 .form_panel {
-  background: #fff;
+  background: #141414;
   padding: 48px 40px;
-  border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.15);
+  border-radius: 16px;
+  border: 1px solid #252525;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   text-align: center;
 }
 
 .form_panel h2 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  color: #333;
+  color: #fff;
   margin-bottom: 8px;
 }
 
 .form_panel p {
-  color: #888;
+  color: #666;
   margin-bottom: 32px;
 }
 
 .form_panel input {
   width: 100%;
-  padding: 14px 18px;
-  margin-bottom: 16px;
-  border: 2px solid #e8e8e8;
-  border-radius: 12px;
-  font-size: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #1a1a1a;
+  color: #e0e0e0;
   transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
 .form_panel input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+  border-color: #00d4ff;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
   outline: none;
+}
+
+.form_panel input::placeholder {
+  color: #555;
 }
 
 .form_panel button {
   width: 100%;
   padding: 14px;
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #000;
+  background: #00d4ff;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 .form_panel button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  background: #fff;
 }
 
 .form_panel a {
   display: inline-block;
   margin-top: 24px;
-  color: #667eea;
+  color: #00d4ff;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .form_panel a:hover {
-  color: #764ba2;
-  text-decoration: underline;
+  color: #fff;
 }
