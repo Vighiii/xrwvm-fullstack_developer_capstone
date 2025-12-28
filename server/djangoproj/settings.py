@@ -7,6 +7,13 @@ SECRET_KEY = 'django-insecure-nuclear-fix'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai',
+    'https://*.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai',
+    'https://*.proxy.cognitiveclass.ai',
+    'http://localhost:8000',
+]
+
 INSTALLED_APPS = [
     'djangoapp.apps.DjangoappConfig',
     'django.contrib.admin',
