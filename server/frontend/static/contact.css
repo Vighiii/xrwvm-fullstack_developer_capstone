@@ -1,0 +1,27 @@
+.contact-header{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-info {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-info h2 {
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+}
+
+.contact-info ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.contact-info li {
+    margin-bottom: 5px;
+}
