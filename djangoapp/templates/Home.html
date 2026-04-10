@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to the Full Stack Capstone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        h1 {
+            color: #007acc;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #007acc;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Full Stack Developer Capstone Project</h1>
+        <nav>
+            <a href="{% url 'djangoapp:index' %}">Dealers</a>
+            <a href="{% url 'djangoapp:register' %}">Register</a>
+            <a href="{% url 'djangoapp:login' %}">Login</a>
+        </nav>
+    </header>
+
+    <section>
+        <p>This is your home page for the Full Stack Application Development Capstone Project.</p>
+        <p>Use the navigation links above to explore dealers, register a new account, or login.</p>
+    </section>
+
+    <footer>
+        &copy; 2026 Full Stack Developer Capstone
+    </footer>
+</body>
+</html>

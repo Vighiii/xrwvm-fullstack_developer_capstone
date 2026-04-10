@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "usermgmt",
   "version": "0.1.0",
   "private": true,
@@ -40,15 +39,4 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
-=======
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
->>>>>>> 182de6a (Initial commit for Full Stack Application Development Capstone Project)
 }
