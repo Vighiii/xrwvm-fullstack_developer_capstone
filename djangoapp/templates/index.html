@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dealer Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #005f73;
+        }
+        ul.dealer-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul.dealer-list li {
+            background: #e0fbfc;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dealer-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #0a9396;
+        }
+        .dealer-details {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dealer Directory</h1>
+
+    {% if dealers %}
+        <ul class="dealer-list">
+            {% for dealer in dealers %}
+                <li>
+                    <div class="dealer-name">{{ dealer.name }}</div>
+                    <div class="dealer-details">
+                        Location: {{ dealer.location }}<br />
+                        Contact: {{ dealer.contact }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No dealers available at this time.</p>
+    {% endif %}
+</body>
+</html>

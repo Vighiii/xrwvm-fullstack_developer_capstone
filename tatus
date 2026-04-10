@@ -1,0 +1,214 @@
+[33m684a657[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Initial commit
+[33m64b3067[m[33m ([m[1;31morigin/main[m[33m)[m Initial commit for Full Stack Application Development Capstone Project
+[33m6bf6c0a[m Merge pull request #216 from RajshriSkillup/main
+[33ma27369a[m Update Dealer.jsx
+[33mdf6d15a[m Merge pull request #201 from nikeshskillup/patch-1
+[33m8115f33[m Update Dealer.jsx
+[33md1f2c5f[m Delete server/database/app.js.new
+[33m00a0b62[m Delete server/database/car_records.json
+[33ma66a910[m Add files via upload
+[33m645ee2f[m Add files via upload
+[33m0b8e814[m Add files via upload
+[33m01d94bc[m Update restapis.py
+[33mb51510a[m Update Home.html
+[33mc7fecd6[m Update style.css
+[33m04a8f01[m Update Register.css
+[33m67f9f7a[m Update Login.css
+[33m0119e88[m Add files via upload
+[33ma95ce8a[m Add files via upload
+[33me247f86[m Add files via upload
+[33m97d4494[m Add files via upload
+[33me6ca532[m Add files via upload
+[33m3fc520c[m Update Home.html
+[33md494507[m Update settings.py
+[33mbd23215[m Update Header.jsx
+[33m70bdbc9[m Update Dealer.jsx
+[33m88e8cb5[m Update Dealers.jsx
+[33m1ec9949[m Update Register.css
+[33m1350224[m Update Home.html
+[33m4d16017[m Update Login.css
+[33md0dc18d[m Update Header.jsx
+[33mfb5badc[m Update App.js
+[33m00e7d76[m Update bootstrap.min.css
+[33m0e90ab4[m Update bootstrap.min.css
+[33mf7f71e0[m Update settings.py
+[33mf5faa4d[m Update About.html
+[33m42af4b3[m Update About.html
+[33m705f61f[m Delete car_dealership.jpg
+[33m5e59e9f[m Add files via upload
+[33m699ff72[m Add files via upload
+[33m3e8c951[m Update urls.py
+[33mbfbc25c[m Add files via upload
+[33m21d8dfa[m Add files via upload
+[33mda8f203[m Update Login.jsx
+[33m8f3593a[m Add files via upload
+[33me555f28[m Add files via upload
+[33m43b5533[m Create Header.jsx
+[33md3f0991[m Update style.css
+[33m040b292[m Update style.css
+[33m1f94e20[m Delete .github/workflows directory
+[33mc456d73[m Update requirements.txt
+[33me0f1095[m Update PostReview.jsx
+[33m2fcf30e[m Update main.yml
+[33m9642c96[m Update main.yml
+[33med4158e[m Create main.yml
+[33m43c9388[m Delete .github/workflows/main.yml
+[33m42a646c[m Update app.py
+[33m72406ec[m Merge pull request #2 from lauvshree/main
+[33md11751f[m Update main.yml
+[33m8fe5877[m Update main.yml
+[33m84fe977[m Update main.yml
+[33m024abd2[m Update main.yml
+[33mb537dd4[m Update main.yml
+[33m0f7c1ca[m Update main.yml
+[33m4f07eaf[m Update main.yml
+[33m03566b5[m Update main.yml
+[33m0230d99[m Update main.yml
+[33m206b4dc[m Update main.yml
+[33m29e5a09[m Update main.yml
+[33m6d71212[m Update main.yml
+[33ma563e36[m Update main.yml
+[33m670fb8a[m Update main.yml
+[33m2f3357f[m Update main.yml
+[33m33b5d4b[m Update settings.py
+[33m6bfb62d[m Update settings.py
+[33mccf796b[m Update urls.py
+[33m28348f7[m Create package.json
+[33mbe89c22[m Update main.yml
+[33m7dd42da[m Update main.yml
+[33md919a9d[m Update main.yml
+[33m6600764[m Delete server/djangoapp/tests.py
+[33mc2dbcb9[m Update models.py
+[33m23c556d[m Update views.py
+[33m8288455[m Update views.py
+[33mcb199ae[m Update urls.py
+[33m5154e35[m Update restapis.py
+[33ma496898[m Update populate.py
+[33me66d3bc[m Update app.py
+[33me507c9d[m Update restapis.py
+[33m814d214[m Update populate.py
+[33m8d9bef7[m Update models.py
+[33mbdee366[m Update app.py
+[33me228895[m Update models.py
+[33m8faf007[m Update app.py
+[33m30584dc[m Update app.py
+[33m7a307d6[m Update app.py
+[33m0018b78[m Update app.py
+[33mf1ac146[m Update admin.py
+[33m125856b[m Update main.yml
+[33m2ebb141[m Create main.yml
+[33m0783be0[m Update Dealer.jsx
+[33m555bcef[m Update .env
+[33m5755840[m Create .env
+[33m61d2c69[m Update restapis.py
+[33mddcdaae[m Delete server/database/loaddb.py
+[33m259f372[m Update package.json
+[33m07f2f95[m Delete server/entrypoint.sh
+[33m70d6790[m Delete server/deployment.yml
+[33m76275c5[m Update PostReview.jsx
+[33ma774289[m Update Dealer.jsx
+[33m43d1efb[m Update PostReview.jsx
+[33m9c316f2[m Update Dealers.jsx
+[33mbac95c5[m Update Dealers.css
+[33maa131bc[m Update app.js
+[33m0f80a83[m Update app.js
+[33m2afc1d4[m Update PostReview.jsx
+[33m38794a1[m Update PostReview.jsx
+[33m036c284[m Update Dealers.css
+[33mfc9001d[m Update views.py
+[33mc1e1cd9[m Create populate.py
+[33m66b3380[m Update models.py
+[33m27b3f80[m Create deployment.yml
+[33m719426b[m Create entrypoint.sh
+[33m89d123f[m Update urls.py
+[33mbc5459e[m Update settings.py
+[33m716a721[m Update package.json
+[33mf04a9a9[m Update settings.py
+[33mbe1345f[m Create style.css
+[33m0e9ae01[m Create PostReview.jsx
+[33m8e657b6[m Create Dealers.css
+[33m66fcf3a[m Create Dealer.jsx
+[33me1bb7d2[m Update Dealers.jsx
+[33maa3c708[m Create Dealers.jsx
+[33m1a94b9a[m Update Login.jsx
+[33m2cb002c[m Update views.py
+[33m950b1fd[m Update views.py
+[33m4b40657[m Update views.py
+[33mb36136a[m Update models.py
+[33mcc84cc3[m Update app.js
+[33m2d99fef[m Update app.py
+[33md00e456[m Update restapis.py
+[33me6b1a38[m Update app.js
+[33m4014b71[m Add files via upload
+[33m7ec093b[m Update app.py
+[33m4c130e1[m Add files via upload
+[33m7dd9bfc[m Create readme.md
+[33m3c068a0[m Create Dockerfile
+[33maf5715d[m Create app.py
+[33mbd5ebe2[m Create requirements.txt
+[33m42c67af[m Added person.png to the static files
+[33m52048e2[m Update About.html
+[33mc781666[m Update Login.css
+[33m531c9b0[m Update Login.jsx
+[33mfbdeaac[m Update About.html
+[33mc218458[m Create About.html
+[33meddb6e9[m Create style.css
+[33m6f9ba34[m Update app.js
+[33m5e99286[m Update urls.py
+[33m26c025d[m Update app.js
+[33m7c5441a[m Update urls.py
+[33mdde41d0[m Update app.js
+[33m68bea8c[m Update app.js
+[33m5835933[m Update Dockerfile
+[33m709a4ad[m Update app.js
+[33mcb7e559[m Update Login.jsx
+[33m443e2a0[m Update package.json
+[33m33fd87d[m Update app.js
+[33m78c080b[m Create docker-compose.yml
+[33mc07e79d[m Create package.json
+[33mb67bb48[m Create Dockerfile
+[33macf35ca[m Create dealership.js
+[33med07f92[m Create review.js
+[33m3978274[m Create app.js
+[33m7ca42df[m Update urls.py
+[33md607fba[m Update urls.py
+[33maf9521a[m Update settings.py
+[33mec87ea0[m Update loaddb.py
+[33mbfcbf33[m Update loaddb.py
+[33md6f94bb[m Delete server/database/data/reviews-full.json
+[33m6b531d3[m Create reviews.json
+[33mc3b78e3[m Delete server/database/data/reviews.json
+[33m2ea8b63[m Create reviews-full.json
+[33m1517f0a[m Create dealerships.json
+[33ma50363c[m Create reviews.json
+[33me967413[m Create loaddb.py
+[33m84c0679[m Update App.js
+[33m8e498e5[m Create Register.css
+[33m0718570[m Delete server/frontend/src/components/signup directory
+[33m40180bf[m Update views.py
+[33me33bd90[m Update Login.jsx
+[33m2fc7c5a[m Update Login.jsx
+[33m24e5491[m Update Login.jsx
+[33mc0db76a[m Update views.py
+[33mc66ecb4[m Update Login.jsx
+[33mf33cac5[m Update Login.jsx
+[33m76ac04c[m Update Login.jsx
+[33m276997a[m Delete server/frontend/src/components/Login/Login_temp.jsx
+[33mb662bee[m Update settings.py
+[33m3f2dd4d[m Update urls.py
+[33m381441a[m Update settings.py
+[33mcf8e9de[m Create requirements.txt
+[33mc84d9a6[m Changed signup
+[33m8f34334[m Create frontend
+[33m6ecbfe6[m added new file structure
+[33ma090e45[m removed all files
+[33m63c539d[m Added new file structure
+[33m8c2e50b[m new struct
+[33mcc32e90[m Update settings.py
+[33md00092e[m Create requirements.txt
+[33m78475a0[m Adding new code structure
+[33m0865ce2[m Update settings.py
+[33mc0a9c7f[m Delete server/djangoapp/templates/djangoapp/contact.html
+[33m8303727[m Delete server/djangoapp/templates/djangoapp/about.html
+[33m0550bdb[m Added initial files
+[33mc0d4ab4[m Initial commit
