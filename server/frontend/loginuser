@@ -1,0 +1,6 @@
+curl -X POST "https://hemanthsaich-8000.theianh
+xt-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/djangoapp/login
+" \                                                 
+  -H "Content-Type: application/json" \
+  -d '{"userName": "Hemanth", "password": "Sai@456"}'
+{"userName": "Hemanth", "status": "Authenticated"}(djangoenv)
