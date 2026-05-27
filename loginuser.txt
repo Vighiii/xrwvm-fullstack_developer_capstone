@@ -1,0 +1,7 @@
+theia@theia-abdulrahm296:/home/project$ curl -X POST "https://abdulrahm296-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/djangoapp/login" \
+  -H "Content-Type: application/json" \
+  -d '{"userName": "Abdulrahm296", "password": "Asdasd"}'
+{"userName": "Abdulrahm296"}theia@theia-curl -X POST "https://abdulrahm296-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/djangoapp/login" \
+  -H "Content-Type: application/json" \
+  -d '{"userName": "abdulrahm296", "password": "Asdasd"}'
+{"userName": "abdulrahm296", "status": "Authenticated"}
