@@ -1,0 +1,9 @@
+[flake8]
+per-file-ignores =
+    server/djangoapp/models.py: W292
+    server/djangoapp/populate.py: E117,E131,E231,E302,E303,E501
+    server/djangoapp/restapis.py: W292
+    server/djangoapp/urls.py: E251,E501
+    server/djangoapp/views.py: W292
+    server/djangoproj/settings.py: E101,E131,E231,E501,W191,W293,W391
+    server/djangoproj/urls.py: E231,E501
