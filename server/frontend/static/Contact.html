@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dealerships</title>
+  <!-- Link Bootstrap before custom styles -->
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkturquoise; height: 1in;">
+      <div class="container-fluid">
+        <h2 style="padding-right: 5%;">Dealerships</h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" style="font-size: larger;" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" style="font-size: larger;" href="/about">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container my-4">
+    <!-- Contact Card with custom margin (my-4) and padding (p-3/p-4) -->
+    <div class="card shadow-sm mx-auto p-3 m-3" style="max-width: 400px;">
+      
+      <!-- Card Image inside the card with margin bottom (mb-3) -->
+      <img src="/static/bestcars.png" class="card-img-top rounded mb-3" alt="Sarah Lawson Photo" style="object-fit: cover; height: 220px;">
+      
+      <div class="card-body p-2">
+        <h3 class="card-title h4 mb-1">Sarah Lawson</h3>
+        <p class="text-muted mb-2"><strong>Role:</strong> Receptionist</p>
+        <p class="mb-3"><strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+        
+        <p class="card-text text-secondary mb-3">
+          "As our lead receptionist, I pride myself on giving everyone a warm welcome and making their visit comfortable from the moment they walk in. I ensure you get to the right department quickly."
+        </p>
+
+        <!-- Contact details inside card footer / list -->
+        <ul class="list-group list-group-flush border-top pt-2">
+          <li class="list-group-item px-0"><strong>Email:</strong> sarah.lawson@example.com</li>
+          <li class="list-group-item px-0"><strong>Phone:</strong> (555) 019-2831</li>
+          <li class="list-group-item px-0"><strong>Location:</strong> Anytown, CA</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="/static/bootstrap.bundle.min.js"></script>
+</body>
+</html>
