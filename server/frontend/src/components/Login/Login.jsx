@@ -1,72 +1,84 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
+import Header from "../Header/Header";
 import "./Login.css";
-import Header from '../Header/Header';
 
-const Login = ({ onClose }) => {
-
+const Login = () => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [open,setOpen] = useState(true)
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  let login_url = window.location.origin+"/djangoapp/login";
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setSubmitting(true);
 
-  const login = async (e) => {
-    e.preventDefault();
-
-    const res = await fetch(login_url, {
+    try {
+      const response = await fetch("/djangoapp/login", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            "userName": userName,
-            "password": password
-        }),
-    });
-    
-    const json = await res.json();
-    if (json.status != null && json.status === "Authenticated") {
-        sessionStorage.setItem('username', json.userName);
-        setOpen(false);        
-    }
-    else {
-      alert("The user could not be authenticated.")
-    }
-};
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userName, password }),
+      });
+      const data = await response.json();
 
-  if (!open) {
-    window.location.href = "/";
+      if (!response.ok || data.status !== "Authenticated") {
+        throw new Error("The username or password is incorrect.");
+      }
+
+      sessionStorage.setItem("username", data.userName);
+      sessionStorage.setItem("firstname", data.firstName || "");
+      sessionStorage.setItem("lastname", data.lastName || "");
+      navigate("/");
+    } catch (requestError) {
+      setError(requestError.message || "Login failed.");
+    } finally {
+      setSubmitting(false);
+    }
   };
-  
 
   return (
-    <div>
-      <Header/>
-    <div onClick={onClose}>
-      <div
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        className='modalContainer'
-      >
-          <form className="login_panel" style={{}} onSubmit={login}>
-              <div>
-              <span className="input_field">Username </span>
-              <input type="text"  name="username" placeholder="Username" className="input_field" onChange={(e) => setUserName(e.target.value)}/>
-              </div>
-              <div>
-              <span className="input_field">Password </span>
-              <input name="psw" type="password"  placeholder="Password" className="input_field" onChange={(e) => setPassword(e.target.value)}/>            
-              </div>
-              <div>
-              <input className="action_button" type="submit" value="Login"/>
-              <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
-              </div>
-              <a className="loginlink" href="/register">Register Now</a>
-          </form>
-      </div>
-    </div>
+    <div className="page-shell">
+      <Header />
+      <main className="auth-page">
+        <form className="auth-card" onSubmit={handleSubmit}>
+          <h1>Welcome back</h1>
+          <p>Sign in to review a dealership.</p>
+
+          {error && <div className="auth-error">{error}</div>}
+
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            autoComplete="username"
+            value={userName}
+            onChange={(event) => setUserName(event.target.value)}
+            required
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+          />
+
+          <button type="submit" disabled={submitting}>
+            {submitting ? "Signing in…" : "Login"}
+          </button>
+
+          <p className="auth-switch">
+            New to Best Cars? <Link to="/register">Register now</Link>
+          </p>
+        </form>
+      </main>
     </div>
   );
 };
