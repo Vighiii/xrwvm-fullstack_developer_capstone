@@ -1,0 +1,82 @@
+name: Capstone CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            server/requirements.txt
+            server/sentiment_analyzer/requirements.txt
+
+      - name: Install Django dependencies
+        run: python -m pip install -r server/requirements.txt
+
+      - name: Validate Django project
+        working-directory: server
+        env:
+          SECRET_KEY: ci-only-secret-key
+          DEBUG: 'False'
+        run: |
+          python manage.py makemigrations djangoapp --check --dry-run
+          python manage.py migrate --noinput
+          python manage.py check
+          python manage.py test
+
+      - name: Validate sentiment service
+        run: |
+          python -m pip install -r server/sentiment_analyzer/requirements.txt
+          python -m py_compile server/sentiment_analyzer/app.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: npm
+          cache-dependency-path: server/frontend/package-lock.json
+
+      - name: Validate database service
+        working-directory: server/database
+        run: |
+          npm install
+          node --check app.js
+          node --check dealership.js
+          node --check review.js
+
+      - name: Build React client
+        working-directory: server/frontend
+        env:
+          CI: 'true'
+        run: |
+          npm ci
+          npm run build
+
+      - name: Create CI evidence summary
+        run: |
+          {
+            echo "Capstone CI completed successfully"
+            echo "- Django checks and tests passed"
+            echo "- Sentiment service compiled"
+            echo "- Node database service syntax checks passed"
+            echo "- React production build completed"
+          } | tee CICD
+
+      - name: Upload CI evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: CICD-evidence
+          path: CICD

@@ -1,88 +1,179 @@
-table{
-    margin:5px;
-    padding:10px;
-    border: grey solid 1px;
-    width:100%
-  }
-  
-  td{
-    padding:10px;
-    align-self: center;
-    border:solid grey .5px;
-    text-align: center;
-    font-size: large;
-  }
-  
-  .review_panel{
-    display: flex;
+.dealers-heading,
+.dealer-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.dealers-heading h1,
+.dealer-hero h1 {
+  margin: 4px 0 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #087a7e;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.state-filter {
+  min-width: 220px;
+  display: grid;
+  gap: 8px;
+  font-weight: 750;
+}
+
+.state-filter select,
+.review-form input,
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #98a2b3;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+.dealers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dealers-table th,
+.dealers-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eaecf0;
+  vertical-align: middle;
+}
+
+.dealers-table th {
+  color: #344054;
+  background: #f9fafb;
+  font-size: 0.9rem;
+}
+
+.dealers-table tbody tr:hover {
+  background: #f0ffff;
+}
+
+.review-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.review-action img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 9px;
+  color: #ffffff;
+  background: #087a7e;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.review-card {
+  min-height: 280px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+}
+
+.sentiment-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.review-card blockquote {
+  flex: 1;
+  margin: 18px 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.reviewer {
+  margin: 0;
+  font-weight: 800;
+}
+
+.vehicle,
+.purchase-date {
+  margin: 4px 0 0;
+  color: #667085;
+}
+
+.review-form-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.review-form {
+  width: min(720px, 100%);
+  display: grid;
+  gap: 12px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(16, 24, 40, 0.1);
+}
+
+.review-form label {
+  margin-top: 8px;
+  font-weight: 750;
+}
+
+@media (max-width: 720px) {
+  .dealers-heading,
+  .dealer-hero {
+    align-items: stretch;
     flex-direction: column;
-    border: solid grey;
-    position: relative;
-    height:7cm;
-    width:6cm;
-    overflow-y: scroll;
-    padding:.3cm;
-    padding-top: 0%;
-    border-radius:10px; 
-    box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.5);
-    margin-bottom: .5cm;
-    justify-content: space-between;
   }
 
-  .postreview{
-    margin:20px;
-    padding:10px;
-    font-size: larger;
+  .state-filter {
+    min-width: 0;
   }
-
-  th{
-    padding:5px;
-    align-self: center;
-    text-align: center;
-    font-size: large;
-    margin-bottom: 1cm;
-    vertical-align: middle;
-    color: black;
-  }
-
-  .reviews_panel {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 1cm;
-    overflow-wrap: normal;
-    margin-top: 1cm;
-    align-items: flex-start;
-  }
-
-  .reviewer {
-    margin: 10px; /* Optional margin for spacing */
-    font-style: italic;
-    color: gray;
-    font-size: small;
-}
-
-.review {
-  margin-top: 1.5cm;
-}
-
-.emotion_icon {
-  align-self: center;
-  position:fixed;
-    width:40px;
-    height:40px;
-    background-color:#0C9;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;  
-}
-
-.review_icon {
-  width:40px;
-}
-
-.review_icon:hover {
-  transform: scale(1.1);
-  border: solid lightgray;
 }

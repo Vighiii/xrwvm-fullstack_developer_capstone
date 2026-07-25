@@ -1,72 +1,130 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import "../Login/Login.css";
 import "./Register.css";
 
 const Register = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const gohome = () => {
-    window.location.href = window.location.origin;
+  const updateField = (event) => {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
   };
 
-  const register = async (e) => {
-    e.preventDefault();
-    // Chức năng gọi API đăng ký (đã được làm gọn để nộp bài)
-    let register_url = window.location.origin + "/djangoapp/register";
-    const res = await fetch(register_url, {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/djangoapp/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            userName: userName,
-            password: password,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-        }),
-    });
-    const json = await res.json();
-    if (json.status) {
-        sessionStorage.setItem("username", json.userName);
-        window.location.href = window.location.origin;
-    } else {
-        alert("The user with same username is already registered");
-        window.location.href = window.location.origin + "/register";
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+
+      if (!response.ok || data.status !== "Authenticated") {
+        throw new Error(data.message || "This username is already registered.");
+      }
+
+      sessionStorage.setItem("username", data.userName);
+      sessionStorage.setItem("firstname", data.firstName || form.firstName);
+      sessionStorage.setItem("lastname", data.lastName || form.lastName);
+      navigate("/");
+    } catch (requestError) {
+      setError(requestError.message || "Registration failed.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <div className="register_container" style={{ width: "50%", margin: "auto" }}>
-      <div className="header" style={{ display: "flex", justifyContent: "space-between" }}>
-        <span className="text" style={{ padding: "20px" }}>Sign Up</span>
-        <a href="/" onClick={gohome} style={{ padding: "20px" }}>X</a>
-      </div>
-      <hr />
-      <form onSubmit={register}>
-        <div className="inputs">
-          <div className="input">
-            <input type="text" name="username" placeholder="Username" className="input_field" onChange={(e) => setUserName(e.target.value)} required/>
+    <main className="auth-page register-page">
+      <form className="auth-card register-card" onSubmit={handleSubmit}>
+        <div className="register-heading">
+          <div>
+            <h1>Sign Up</h1>
+            <p>Create your Best Cars account.</p>
           </div>
-          <div className="input">
-            <input type="text" name="first_name" placeholder="First Name" className="input_field" onChange={(e) => setFirstName(e.target.value)} required/>
-          </div>
-          <div className="input">
-            <input type="text" name="last_name" placeholder="Last Name" className="input_field" onChange={(e) => setLastName(e.target.value)} required/>
-          </div>
-          <div className="input">
-            <input type="email" name="email" placeholder="Email" className="input_field" onChange={(e) => setEmail(e.target.value)} required/>
-          </div>
-          <div className="input">
-            <input type="password" name="password" placeholder="Password" className="input_field" onChange={(e) => setPassword(e.target.value)} required/>
-          </div>
+          <Link className="close-link" to="/" aria-label="Close registration">
+            ×
+          </Link>
         </div>
-        <div className="submit_panel">
-          <button className="submit" type="submit">Register</button>
-        </div>
+
+        {error && <div className="auth-error">{error}</div>}
+
+        <label htmlFor="register-username">Username</label>
+        <input
+          id="register-username"
+          type="text"
+          name="userName"
+          placeholder="Username"
+          value={form.userName}
+          onChange={updateField}
+          required
+        />
+
+        <label htmlFor="register-firstname">First Name</label>
+        <input
+          id="register-firstname"
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={form.firstName}
+          onChange={updateField}
+          required
+        />
+
+        <label htmlFor="register-lastname">Last Name</label>
+        <input
+          id="register-lastname"
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={form.lastName}
+          onChange={updateField}
+          required
+        />
+
+        <label htmlFor="register-email">Email</label>
+        <input
+          id="register-email"
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={updateField}
+          required
+        />
+
+        <label htmlFor="register-password">Password</label>
+        <input
+          id="register-password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={updateField}
+          minLength="8"
+          required
+        />
+
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Creating account…" : "Register"}
+        </button>
       </form>
-    </div>
+    </main>
   );
 };
 
