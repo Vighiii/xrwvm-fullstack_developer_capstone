@@ -195,3 +195,19 @@ def add_review(request):
         {"error": "POST request required"},
         status=405
     )
+
+def get_dealer_reviews_page(request, dealer_id):
+    reviews = get_request(f"/fetchReviews/dealer/{dealer_id}")
+
+    # Add sentiment to each review
+    for review in reviews:
+        try:
+            sentiment = analyze_review_sentiments(review.get("review", ""))
+            review["sentiment"] = sentiment.get("sentiment", "neutral")
+        except Exception:
+            review["sentiment"] = "neutral"
+
+    return JsonResponse({
+        "status": 200,
+        "reviews": reviews
+    })
