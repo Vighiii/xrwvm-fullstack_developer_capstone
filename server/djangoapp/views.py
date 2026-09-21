@@ -9,7 +9,7 @@
 # from datetime import datetime
 
 from django.http import JsonResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 import logging
 import json
@@ -26,22 +26,26 @@ logger = logging.getLogger(__name__)
 # Create a `login_request` view to handle sign in request
 @csrf_exempt
 def login_user(request):
-    # Get username and password from request.POST dictionary
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
-    # Try to check if provide credential can be authenticated
+
     user = authenticate(username=username, password=password)
+
     data = {"userName": username}
+
     if user is not None:
-        # If user is valid, call login method to login current user
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
+
     return JsonResponse(data)
 
+
 # Create a `logout_request` view to handle sign out request
-# def logout_request(request):
-# ...
+def logout_request(request):
+    logout(request)
+    return JsonResponse({"userName": ""})
+
 
 # Create a `registration` view to handle sign up request
 @csrf_exempt
@@ -84,4 +88,3 @@ def registration(request):
         {"error": "POST request required"},
         status=405
     )
-# ...
