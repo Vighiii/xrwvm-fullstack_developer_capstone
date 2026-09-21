@@ -15,12 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from djangoapp import views
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('djangoapp/', include('djangoapp.urls')),
+
+    # Dealer and review APIs
+    path('fetchDealers', views.get_dealerships, name='fetchDealers'),
+    path('fetchDealer/<int:dealer_id>', views.get_dealer_details, name='fetchDealer'),
+    path('fetchDealers/<str:state>', views.get_dealerships_by_state, name='fetchDealersByState'),
+    path('fetchReviews/dealer/<int:dealer_id>', views.get_dealer_reviews, name='fetchDealerReviews'),
+    path('analyze/<str:text>', views.analyze_review, name='analyzeReview'),
+
     path('', TemplateView.as_view(template_name="Home.html")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
