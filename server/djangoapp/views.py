@@ -8,6 +8,8 @@
 # from django.contrib import messages
 # from datetime import datetime
 
+from .models import CarMake, CarModel
+from .populate import initiate
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -88,3 +90,18 @@ def registration(request):
         {"error": "POST request required"},
         status=405
     )
+def get_cars(request):
+    if CarMake.objects.count() == 0:
+        initiate()
+
+    car_models = CarModel.objects.select_related('car_make')
+
+    cars = []
+
+    for car_model in car_models:
+        cars.append({
+            "CarModel": car_model.name,
+            "CarMake": car_model.car_make.name
+        })
+
+    return JsonResponse({"CarModels": cars})
