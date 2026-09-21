@@ -10,6 +10,7 @@
 
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -43,23 +44,44 @@ def login_user(request):
 # ...
 
 # Create a `registration` view to handle sign up request
-# @csrf_exempt
-# def registration(request):
-# ...
+@csrf_exempt
+def registration(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
 
-# # Update the `get_dealerships` view to render the index page with
-# a list of dealerships
-# def get_dealerships(request):
-# ...
+        username = data.get("userName")
+        password = data.get("password")
+        first_name = data.get("firstName")
+        last_name = data.get("lastName")
+        email = data.get("email")
 
-# Create a `get_dealer_reviews` view to render the reviews of a dealer
-# def get_dealer_reviews(request,dealer_id):
-# ...
+        if not username or not password:
+            return JsonResponse(
+                {"error": "Username and password are required"},
+                status=400
+            )
 
-# Create a `get_dealer_details` view to render the dealer details
-# def get_dealer_details(request, dealer_id):
-# ...
+        if User.objects.filter(username=username).exists():
+            return JsonResponse(
+                {"error": "Username already exists"},
+                status=400
+            )
 
-# Create a `add_review` view to submit a review
-# def add_review(request):
+        user = User.objects.create_user(
+            username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            email=email
+        )
+
+        return JsonResponse(
+            {"userName": user.username, "status": "Registered"},
+            status=201
+        )
+
+    return JsonResponse(
+        {"error": "POST request required"},
+        status=405
+    )
 # ...
