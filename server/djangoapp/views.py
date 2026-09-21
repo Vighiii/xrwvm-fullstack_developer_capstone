@@ -107,6 +107,43 @@ def get_cars(request):
 
     return JsonResponse({"CarModels": cars})
 
+# Get dealer details for the review page
+def get_dealer(request, dealer_id):
+    dealer = get_request(f"/fetchDealer/{dealer_id}")
+
+    return JsonResponse({
+        "status": 200,
+        "dealer": dealer
+    })
+
+
+# Add a review
+@csrf_exempt
+def add_review(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+
+            result = post_review(data)
+
+            return JsonResponse({
+                "status": 200,
+                "message": "Review added successfully",
+                "review": result
+            })
+
+        except Exception as error:
+            logger.error(error)
+            return JsonResponse(
+                {"status": 500, "error": "Error adding review"},
+                status=500
+            )
+
+    return JsonResponse(
+        {"status": 405, "error": "POST request required"},
+        status=405
+    )
+
 # Get all dealerships
 def get_dealerships(request):
     return JsonResponse(
