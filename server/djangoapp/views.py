@@ -10,6 +10,7 @@
 
 from .models import CarMake, CarModel
 from .populate import initiate
+from .restapis import get_request, analyze_review_sentiments, post_review
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -105,3 +106,55 @@ def get_cars(request):
         })
 
     return JsonResponse({"CarModels": cars})
+
+# Get all dealerships
+def get_dealerships(request):
+    return JsonResponse(
+        get_request("/fetchDealers"),
+        safe=False
+    )
+
+
+# Get dealership details by ID
+def get_dealer_details(request, dealer_id):
+    return JsonResponse(
+        get_request(f"/fetchDealer/{dealer_id}"),
+        safe=False
+    )
+
+
+# Get dealerships by state
+def get_dealerships_by_state(request, state):
+    return JsonResponse(
+        get_request(f"/fetchDealers/{state}"),
+        safe=False
+    )
+
+
+# Get reviews for a particular dealer
+def get_dealer_reviews(request, dealer_id):
+    return JsonResponse(
+        get_request(f"/fetchReviews/dealer/{dealer_id}"),
+        safe=False
+    )
+
+
+# Analyze sentiment of a review
+def analyze_review(request, text):
+    return JsonResponse(
+        analyze_review_sentiments(text)
+    )
+
+
+# Add a review
+@csrf_exempt
+def add_review(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        result = post_review(data)
+        return JsonResponse(result)
+
+    return JsonResponse(
+        {"error": "POST request required"},
+        status=405
+    )
